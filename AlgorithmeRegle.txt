@@ -1,0 +1,35 @@
+Regle : liste de proposition, dont le dernier élément est la conclusion de la règle
+
+** Fonctions **
+
+creer_regle : Regle
+    DEBUT
+    nouvelleRegle <- new(regle)
+    retourner nouvelleRegle
+    FIN
+
+est_vide(Regle r) : Booléen
+    DEBUT 
+    si r est indéfini alors
+        retourner VRAI
+    sinon 
+        retourner FAUX
+    fin sinon
+    FIN
+
+ajout_proposition(Regle r, string prop)
+    DEBUT
+    si est_vide(r) alors
+            nouveau(r)
+            contenu(r) <- prop
+            suiv(r) <- indéfini
+        sinon
+            tant que non est_vide(r) faire
+                r <- suiv(r)
+            fin tant que
+            nouveau(nouvProp)
+            contenu(nouvProp) <- prop
+            suiv(nouvProp) <- indéfini
+            suiv(r) <- nouvProp
+        }
+    FIN
