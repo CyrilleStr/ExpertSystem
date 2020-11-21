@@ -25,8 +25,11 @@ typedef enum{
  */
 
 Regle creer_regle();
-void ajout_proposition(Regle regle, char* prop);
-Boolean ajout_conclusion(Regle r, char* ccl);
 Boolean est_vide(Regle r);
+char* contenu(Regle r);
+char* conclusion(Regle r);
+Regle ajout_proposition(Regle regle, char* prop);
+Boolean ajout_conclusion(Regle r, char* ccl);
 Boolean contient(Regle r, char* prop);
 Boolean suppr_prop(Regle r, char* prop);
+void afficher_regle(Regle r);

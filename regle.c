@@ -32,7 +32,11 @@ Boolean est_vide(Regle r){
  */
 
 char* contenu(Regle r){
-    return r->contenu;
+    if(r==NULL){
+        return NULL;
+    }else{
+      return r->contenu;
+    }
 }
 
 /**
@@ -46,7 +50,7 @@ char* conclusion(Regle r){
         return NULL;
     }else{
         Regle tmp = r;
-        while(!est_vide(tmp)){
+        while(!est_vide(tmp->suiv)){
             tmp = tmp->suiv;
         }
         return tmp->contenu;
@@ -59,21 +63,24 @@ char* conclusion(Regle r){
  * @return void
  */ 
 
-void ajout_proposition(Regle r, char* prop){
+Regle ajout_proposition(Regle r, char* prop){
     if(est_vide(r)){ // Première proposition de la règle
         r = (Regle) malloc(sizeof(Propostition));
-        r->contenu = prop;
+        r->contenu  = malloc(strlen(prop));
+        strcpy(r->contenu,prop);
         r->suiv = NULL;
     }else{ // La règle n'est pas vide
         Regle tmp = r;
-        while(!est_vide(tmp)){
+        while(!est_vide(tmp->suiv)){
             tmp = tmp->suiv;
         }
         Regle nouvProp = (Regle) malloc(sizeof(Propostition));
-        nouvProp->contenu = prop;
+        nouvProp->contenu = malloc(strlen(prop));
+        strcpy(nouvProp->contenu,prop);
         nouvProp->suiv = NULL;
-        tmp->suiv = nouvProp;   
+        tmp->suiv = nouvProp;
     }
+    return r;
 }
 
 /**
@@ -87,13 +94,14 @@ Boolean ajout_conclusion(Regle r, char* ccl){
         return FALSE;
     }else{
         Regle tmp = r;
-        while(!est_vide(tmp)){
+        while(!est_vide(tmp->suiv)){
             tmp = tmp->suiv;
         }
         Regle nouvProp = (Regle) malloc(sizeof(Propostition));
-        nouvProp->contenu = ccl;
+        strcpy(nouvProp->contenu,ccl);
         nouvProp->suiv = NULL;
-        tmp->suiv = nouvProp;   
+        tmp->suiv = nouvProp;
+        return TRUE;
     }
 }
 
@@ -121,7 +129,7 @@ Boolean contient(Regle r, char* prop){
  * @return Boolean (TRUE si la proposition est contenu dans la règle et a bien été supprimé et FALSE si non)
  */
 
-Boolean suppr_prop(Regle r, char* prop){
+/*Boolean suppr_prop(Regle r, char* prop){
     if(est_vide(r)){
         return FALSE;
     }else{
@@ -134,4 +142,30 @@ Boolean suppr_prop(Regle r, char* prop){
             return suppr_prop(r->suiv,prop);
         }
     }
+}*/
+
+void afficher_regle(Regle r){
+    if(r==NULL){
+        printf("\n\nLa regle est vide");
+    }else{
+        printf("\n\n***Regle***");
+        Regle tmp = r;
+        if(est_vide(tmp->suiv)){
+            printf("\nCette regle ne contient pas de conclusion");
+            printf("\nProposition 1: %s",tmp->contenu);
+        }else{
+            printf("\nPremisse :");
+            int i = 1;
+            while(!est_vide(tmp->suiv->suiv)){
+                printf("\n\t%d : %s",i,tmp->contenu);
+                i++;
+                tmp = tmp->suiv;
+            }
+            printf("\n\t%d : %s",i,tmp->contenu);
+            printf("\nConclusion : \n\t%s",tmp->suiv->contenu);
+        }
+        printf("\n***********");
+    }
 }
+
+
