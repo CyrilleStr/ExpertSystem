@@ -41,9 +41,32 @@ typedef struct regle {
 
 /***** Définition des prototypes *****/
 
+/**
+ * creer_regle : créer un pointeur (de valeur nulle) sur une liste de proposition
+ * @param
+ * @return Regle
+ */
 Regle creer_regle();
+
+/**
+ * est_vide : test si la prémisse d'une Règle est vide
+ * @param Regle r
+ * @return Boolean (TRUE si vide et FALSE si non vide)
+ */
 bool est_vide(Regle r);
+
+/**
+ * contenu : accède à la proposition se trouvant en tête d'une prémisse
+ * @param Regle r
+ * @return string
+ */
 char* contenu(Regle r);
+
+/**
+ * conclusion : accède à la conclusion d'une règle
+ * @param Regle r
+ * @return string
+ */
 char* conclusion(Regle r);
 
 /**
@@ -53,10 +76,36 @@ char* conclusion(Regle r);
  * @param prop 
  * @return Regle 
  */
-Regle ajout_proposition(Regle regle, char* prop);
-bool ajout_conclusion(Regle r, char* ccl);
-bool contient(Regle r, char* prop);
-Regle suppr_prop(Regle r, Regle p, char* prop);
+Regle ajout_proposition(Regle r, char* prop);
+
+/**
+ * ajout_conclusion : ajoute une conlusion à la fin d'une regle (liste chaînées de proposition)
+ * @param Regle r, string ccl
+ * @return Boolean (TRUE si l'ajout a été fait et FALSE si l'ajout a échoué)
+ */ 
+Regle ajout_conclusion(Regle r, char* ccl);
+
+/**
+ * @brief Teste si une proposition est contenue dans la prémisse d'une règle.
+ * 
+ * @param p la prémisse de la règle
+ * @param prop la proposition à tester
+ * @return true la prémisse contient la proposition
+ * @return false la prémisse ne contient pas la proposition
+ */
+bool contient(Premisse p, char* prop);
+
+/**
+ * @brief Supprime une proposition d'une prémisse
+ * 
+ * @param p prémisse
+ * @param ptrOriginal idem que p
+ * @param prop proposition à supprimer
+ * @return Premisse prémisse mise à jour
+ */
+Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop);
+
+
 void afficher_regle(Regle r);
 
 #endif

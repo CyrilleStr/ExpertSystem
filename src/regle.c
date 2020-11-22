@@ -1,21 +1,13 @@
-#include "./../lib/regle.h"
+#include "regle.h"
 
-/**
- * creer_regle : créer un pointeur (de valeur nulle) sur une liste de proposition
- * @param
- * @return Regle
- */
 Regle creer_regle(){
     Regle nouvR;
     nouvR.prem = NULL;
     nouvR.ccl = NULL;
+
+    return nouvR;
 }
 
-/**
- * est_vide : test si la prémisse d'une Règle est vide
- * @param Regle r
- * @return Boolean (TRUE si vide et FALSE si non vide)
- */
 bool est_vide(Regle r){
     if(r.prem == NULL && r.ccl == NULL){
         return true;
@@ -24,11 +16,6 @@ bool est_vide(Regle r){
     }
 }
 
-/**
- * contenu : accède à la proposition se trouvant en tête d'une prémisse
- * @param Regle r
- * @return string
- */
 char* contenu(Regle r){
     if(est_vide(r)){
         return NULL;
@@ -37,83 +24,54 @@ char* contenu(Regle r){
     }
 }
 
-/**
- * conclusion : accède à la conclusion d'une règle
- * @param Regle r
- * @return string
- */
 char* conclusion(Regle r){
     if(est_vide(r)){
         return NULL;
     }else{
-        Regle tmp = r;
-        while(!est_vide(tmp->suiv)){
-            tmp = tmp->suiv;
-        }
-        return tmp->contenu;
+        return r.ccl;
     }
 }
 
-/**
- * ajout_proposition : ajoute une proposition à une règle, l'ajout se fait en queue.
- * @param Regle r, string prop
- * @param string prop
- * @return Regle
- */ 
 Regle ajout_proposition(Regle r, char* prop){
     if(est_vide(r)){ // Première proposition de la règle
-        r = (Regle) malloc(sizeof(Propostition));
-        r->contenu  = malloc(strlen(prop));
-        strcpy(r->contenu,prop);
-        r->suiv = NULL;
-    }else{ // La règle n'est pas vide
-        Regle tmp = r;
-        while(!est_vide(tmp->suiv)){
+        r.prem = (Premisse) malloc(sizeof(Propostition));
+        r.prem->contenu  = malloc(strlen(prop));
+        strcpy(r.prem->contenu,prop);
+        r.prem->suiv = NULL;
+
+    }else if(!contient(r.prem, prop)){ // La règle n'est pas vide
+        Premisse tmp = r.prem;
+        while(tmp->suiv!=NULL){
             tmp = tmp->suiv;
         }
-        Regle nouvProp = (Regle) malloc(sizeof(Propostition));
+        Premisse nouvProp = (Premisse) malloc(sizeof(Propostition));
         nouvProp->contenu = malloc(strlen(prop));
         strcpy(nouvProp->contenu,prop);
         nouvProp->suiv = NULL;
         tmp->suiv = nouvProp;
+
+    } else {
+        printf("\nErreur: La proposition existe deja dans cette regle.");
     }
+
     return r;
 }
 
-/**
- * ajout_conclusion : ajoute une conlusion à la fin d'une regle (liste chaînées de proposition)
- * @param Regle r, string ccl
- * @return Boolean (TRUE si l'ajout a été fait et FALSE si l'ajout a échoué)
- */ 
-Boolean ajout_conclusion(Regle r, char* ccl){
-    if(est_vide(r)){ // On ne pas ajouter une conclusion a une règle sans prémisse
-        return FALSE;
-    }else{
-        Regle tmp = r;
-        while(!est_vide(tmp->suiv)){
-            tmp = tmp->suiv;
-        }
-        Regle nouvProp = (Regle) malloc(sizeof(Propostition));
-        strcpy(nouvProp->contenu,ccl);
-        nouvProp->suiv = NULL;
-        tmp->suiv = nouvProp;
-        return TRUE;
-    }
+Regle ajout_conclusion(Regle r, char* ccl){
+    r.ccl = malloc(strlen(ccl));
+    strcpy(r.ccl, ccl);
+
+    return r;
 }
 
-/**
- * contient : test si une proposition appartient à la prémisse d'une règle (algorithme récursif)
- * @param Regle r, string prop
- * @return Boolean (TRUE si la proposition est contenu dans la règle et FALSE si non)
- */
-Boolean contient(Regle r, char* prop){
-    if(est_vide(r)){
-        return FALSE;
+bool contient(Premisse p, char* prop){
+    if(p == NULL){
+        return false;
     }else{
-        if(strcmp(r->contenu,prop)==0){
-            return TRUE;
+        if(strcmp(p->contenu,prop) == 0){
+            return true;
         }else{
-            return contient(r->suiv,prop);
+            return contient(p->suiv,prop);
         }
     }
 }
@@ -122,57 +80,61 @@ Boolean contient(Regle r, char* prop){
  * suppr_prop : supprime une proposition de la prémisse d'une règle
  * @param Regle r, Regle p(permet de traverser une règle en gardant r intacte), string prop
  * @return Regle (La règle si la proposition est contenu dans la règle et a bien été supprimé et NULL si non)
- */
-Regle suppr_prop(Regle r, Regle p, char* prop){
-    if(est_vide(r) || est_vide(p)){
+*/
+Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
+    if(p == NULL){
         return NULL;
-    }else{
-        if(strcmp(r->contenu,prop)==0){
-            Regle tmp = r->suiv;
-            free(r);
-            return tmp;
-        }else{
-            if(est_vide(p->suiv)){
-                return NULL;
-            }else{
-                if(strcmp(p->suiv->contenu,prop)==0){
-                    Regle tmp = NULL;
-                    if(!est_vide(p->suiv->suiv)){
-                        tmp = p->suiv->suiv;
-                    }
+    } else {
+        // Première proposition
+        Premisse pointeur = p->suiv;
+        if(strcmp(p->contenu, prop) == 0){ // Les deux chaînes sont identiques
+            
+            free(p);
+            return pointeur;
+        } else {
+            // Propositions suivantes
+            if(pointeur == NULL){
+                return NULL; // La prémisse contient une seule proposition et la première proposition ne correspondait pas.
+            } else {
+                if(strcmp(p->suiv->contenu, prop) == 0){ // Le suivant est à supprimer
+                    
+                    pointeur = p->suiv->suiv;
                     free(p->suiv);
-                    p->suiv = tmp;
-                    return r;
+                    p->suiv = pointeur;
+                    return ptrOriginal;
                 }else{
-                    return suppr_prop(r,p->suiv,prop);
+                    return suppr_prop(p->suiv, ptrOriginal, prop);
                 }
             }
         }
     }
-} // Pb: cet algo peut supprimer la ccl
+}
 
 void afficher_regle(Regle r){
-    if(r==NULL){
+    if(est_vide(r)){
         printf("\n\nLa regle est vide");
     }else{
         printf("\n\n***Regle***");
-        Regle tmp = r;
-        if(est_vide(tmp->suiv)){
-            printf("\nCette regle ne contient pas de conclusion");
-            printf("\nProposition 1: %s",tmp->contenu);
-        }else{
-            printf("\nPremisse :");
+        // Prémisse
+        if(r.prem->contenu == NULL){
+            printf("\nLa prémisse est vide.");
+        } else {
+            Premisse cursor = r.prem;
             int i = 1;
-            while(!est_vide(tmp->suiv->suiv)){
-                printf("\n\t%d : %s",i,tmp->contenu);
+            printf("\nPremisse :");
+            while(cursor != NULL){
+                printf("\n\t%d : %s",i,cursor->contenu);
+                cursor = cursor->suiv;
                 i++;
-                tmp = tmp->suiv;
             }
-            printf("\n\t%d : %s",i,tmp->contenu);
-            printf("\nConclusion : \n\t%s",tmp->suiv->contenu);
+        }
+        // Conclusion
+        if(r.ccl == NULL){
+            printf("\nCette regle ne contient pas de conclusion.");
+        } else {
+            printf("\nConclusion : \n\t%s",r.ccl);
         }
         printf("\n***********");
     }
 }
-
 

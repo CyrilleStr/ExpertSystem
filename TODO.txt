@@ -1,0 +1,7 @@
+Créer fct premisse_vide
+Refaire la fonction prop
+    - Rajouter
+Créer fct supprimer_regle
+
+Ooptionnel
+Modifier suppr_prop pr pouvoir supprimer la première prop d'une prémisse

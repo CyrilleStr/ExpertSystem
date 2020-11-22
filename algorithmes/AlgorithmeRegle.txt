@@ -1,12 +1,23 @@
-Regle : liste de proposition, dont le dernier élément est la conclusion de la règle
+**** LEXIQUE DE LA LIBRAIRIE ****
 
-** Fonctions **
+Règle : liste de proposition, dont le dernier élément est la conclusion de la règle
 
-creer_regle : Regle
-    DEBUT
-    nouvelleRegle <- new(regle)
+
+**** ALGORITHMES ****
+** CREER REGLE **
+* LEXIQUE
+- nouvelleRègle : élément de type Règle
+
+* DONNEES
+
+* RESULTAT(S)
+- nouvelleRegle
+
+* DEBUT
+    nouvelleRegle <- new(Regle)
     retourner nouvelleRegle
-    FIN
+* FIN
+
 
 est_vide(Regle r) : Booléen
     DEBUT 

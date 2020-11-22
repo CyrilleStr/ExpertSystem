@@ -1,4 +1,4 @@
-CFLAGS=-W -Wall
+CFLAGS=-W -Wall -Werror -std=c99 -I lib/
 EXEC=main
 
 all: $(EXEC)
