@@ -1,6 +1,12 @@
+#ifndef regle
+#define regle
+
+#ifndef standard
+#define standard
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#endif
 
 
 /**
@@ -33,3 +39,5 @@ Boolean ajout_conclusion(Regle r, char* ccl);
 Boolean contient(Regle r, char* prop);
 Regle suppr_prop(Regle r, Regle p, char* prop);
 void afficher_regle(Regle r);
+
+#endif
