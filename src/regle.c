@@ -5,10 +5,10 @@
  * @param
  * @return Regle
  */
-
 Regle creer_regle(){
-    Regle nouvR = NULL;
-    return nouvR;
+    Regle nouvR;
+    nouvR.prem = NULL;
+    nouvR.ccl = NULL;
 }
 
 /**
@@ -16,12 +16,11 @@ Regle creer_regle(){
  * @param Regle r
  * @return Boolean (TRUE si vide et FALSE si non vide)
  */
-
-Boolean est_vide(Regle r){
-    if(r==NULL){
-        return TRUE;
+bool est_vide(Regle r){
+    if(r.prem == NULL && r.ccl == NULL){
+        return true;
     }else{
-        return FALSE;
+        return false;
     }
 }
 
@@ -30,12 +29,11 @@ Boolean est_vide(Regle r){
  * @param Regle r
  * @return string
  */
-
 char* contenu(Regle r){
-    if(r==NULL){
+    if(est_vide(r)){
         return NULL;
     }else{
-      return r->contenu;
+      return r.prem->contenu;
     }
 }
 
@@ -44,7 +42,6 @@ char* contenu(Regle r){
  * @param Regle r
  * @return string
  */
-
 char* conclusion(Regle r){
     if(est_vide(r)){
         return NULL;
@@ -58,11 +55,11 @@ char* conclusion(Regle r){
 }
 
 /**
- * ajout_proposition : ajoute une proposition à une règle (liste chaînées de proposition)
+ * ajout_proposition : ajoute une proposition à une règle, l'ajout se fait en queue.
  * @param Regle r, string prop
+ * @param string prop
  * @return Regle
  */ 
-
 Regle ajout_proposition(Regle r, char* prop){
     if(est_vide(r)){ // Première proposition de la règle
         r = (Regle) malloc(sizeof(Propostition));
@@ -88,7 +85,6 @@ Regle ajout_proposition(Regle r, char* prop){
  * @param Regle r, string ccl
  * @return Boolean (TRUE si l'ajout a été fait et FALSE si l'ajout a échoué)
  */ 
-
 Boolean ajout_conclusion(Regle r, char* ccl){
     if(est_vide(r)){ // On ne pas ajouter une conclusion a une règle sans prémisse
         return FALSE;
@@ -110,7 +106,6 @@ Boolean ajout_conclusion(Regle r, char* ccl){
  * @param Regle r, string prop
  * @return Boolean (TRUE si la proposition est contenu dans la règle et FALSE si non)
  */
-
 Boolean contient(Regle r, char* prop){
     if(est_vide(r)){
         return FALSE;
@@ -128,7 +123,6 @@ Boolean contient(Regle r, char* prop){
  * @param Regle r, Regle p(permet de traverser une règle en gardant r intacte), string prop
  * @return Regle (La règle si la proposition est contenu dans la règle et a bien été supprimé et NULL si non)
  */
-
 Regle suppr_prop(Regle r, Regle p, char* prop){
     if(est_vide(r) || est_vide(p)){
         return NULL;

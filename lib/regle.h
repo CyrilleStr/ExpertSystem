@@ -1,42 +1,61 @@
-#ifndef regle
-#define regle
+#ifndef REGLES
+#define REGLES
 
-#ifndef standard
-#define standard
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#endif
+#include <stdbool.h>
 
+/***** Définition des types *****/
 
 /**
- * Définition des types :
- * Regle : liste chaînées de proposition, dont le dernier élément est la conclusion de la règle
- * Booléen : peut prendre la valeur TRUE (1) ou FALSE (0)
+ * @brief Element de la liste chaînée 
+ * 
  */
-
-typedef struct proposition{
+typedef struct proposition {
     char* contenu;
     struct proposition* suiv;
-}Propostition;
-typedef Propostition* Regle;
-
-typedef enum{
-    FALSE = 0,
-    TRUE = 1
-}Boolean; 
+} Propostition;
 
 /**
- * Définition des prototypes de fonctions :
+ * @brief Définition d'une prémisse comme une liste chaînée de propositions (pour une meilleure lisibilité du code)
+ * 
  */
+typedef Propostition* Premisse;
+
+/**
+ * @brief Définition d'une conclusion comme étant une chaîne de caractères (meilleure lisibilité du code)
+ * 
+ */
+typedef char* Conclusion;
+
+/**
+ * @brief Structure composée d'une prémisse et d'une conclusion.
+ * 
+ */
+typedef struct regle {
+    Premisse prem;
+    Conclusion ccl;
+} Regle;
+
+
+/***** Définition des prototypes *****/
 
 Regle creer_regle();
-Boolean est_vide(Regle r);
+bool est_vide(Regle r);
 char* contenu(Regle r);
 char* conclusion(Regle r);
+
+/**
+ * @brief ajoute une proposition à une règle, l'ajout se fait en queue.
+ * 
+ * @param regle 
+ * @param prop 
+ * @return Regle 
+ */
 Regle ajout_proposition(Regle regle, char* prop);
-Boolean ajout_conclusion(Regle r, char* ccl);
-Boolean contient(Regle r, char* prop);
+bool ajout_conclusion(Regle r, char* ccl);
+bool contient(Regle r, char* prop);
 Regle suppr_prop(Regle r, Regle p, char* prop);
 void afficher_regle(Regle r);
 

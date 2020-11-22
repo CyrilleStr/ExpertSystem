@@ -11,4 +11,4 @@ build/main.o: src/main.c lib/regle.h
 	gcc -o build/main.o -c src/main.c $(CFLAGS)
 
 clean:
-	del *.exe *.o
+	del *.exe /build/*.o
