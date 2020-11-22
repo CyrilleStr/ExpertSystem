@@ -106,7 +106,7 @@ Boolean ajout_conclusion(Regle r, char* ccl){
 }
 
 /**
- * contient : test si une proposition appartient à la prémisse d'une règle
+ * contient : test si une proposition appartient à la prémisse d'une règle (algorithme récursif)
  * @param Regle r, string prop
  * @return Boolean (TRUE si la proposition est contenu dans la règle et FALSE si non)
  */
@@ -125,24 +125,30 @@ Boolean contient(Regle r, char* prop){
 
 /**
  * suppr_prop : supprime une proposition de la prémisse d'une règle
- * @param Regle r, string prop
- * @return Boolean (TRUE si la proposition est contenu dans la règle et a bien été supprimé et FALSE si non)
+ * @param Regle r, Regle p(permet de traverser une règle en gardant r intacte), string prop
+ * @return Regle (La règle si la proposition est contenu dans la règle et a bien été supprimé et NULL si non)
  */
 
-/*Boolean suppr_prop(Regle r, char* prop){
-    if(est_vide(r)){
-        return FALSE;
+Regle suppr_prop(Regle r, Regle p, char* prop){
+    if(est_vide(r) || est_vide(p)){
+        return NULL;
     }else{
         if(strcmp(r->contenu,prop)==0){
-            // pas fini
-            r->suiv;
+            Regle tmp = r->suiv;
             free(r);
-            return TRUE;
+            return tmp;
         }else{
-            return suppr_prop(r->suiv,prop);
+            if(strcmp(p->suiv->contenu,prop)==0){
+                Regle tmp = p->suiv->suiv;
+                free(p->suiv);
+                p->suiv = tmp;
+                return r;
+            }else{
+                return suppr_prop(r,p->suiv,prop);
+            }
         }
     }
-}*/
+} // Pb: cet algo peut supprimer la ccl
 
 void afficher_regle(Regle r){
     if(r==NULL){

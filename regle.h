@@ -31,5 +31,5 @@ char* conclusion(Regle r);
 Regle ajout_proposition(Regle regle, char* prop);
 Boolean ajout_conclusion(Regle r, char* ccl);
 Boolean contient(Regle r, char* prop);
-Boolean suppr_prop(Regle r, char* prop);
+Regle suppr_prop(Regle r, Regle p, char* prop);
 void afficher_regle(Regle r);

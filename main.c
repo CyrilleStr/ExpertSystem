@@ -19,15 +19,31 @@ int main(){
     r = ajout_proposition(r,input);
     
     printf("\nAjout conclusion:");
-    scanf("%s",input);
+    gets(input);
     if(!ajout_conclusion(r,input)){
         printf("\nEchec de l'ajout de la conclusion");
     }
 
     afficher_regle(r);
 
-    Regle tmp;
-    while(!est_vide(r)){
+    printf("\nProposition a chercher dans la premisse :");
+    gets(input);
+    if(contient(r,input)){
+        printf("\nCette proposition est bien dans la premisse de cette regle");
+    }else{
+        printf("\nCette proposition n'est pas dans la premisse de cette regle");
+    }
+
+    printf("\nProposition a supprimer :");
+    gets(input);
+    if(!(r = suppr_prop(r,r,input))){
+        printf("\nCet proposition n'est pas contenu dans cette règle");
+    }
+
+    afficher_regle(r);
+
+    Regle tmp=NULL;
+    while(!est_vide(r->suiv)){
         tmp = r->suiv;
         free(r);
         r = tmp;
