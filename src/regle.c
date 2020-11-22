@@ -60,7 +60,7 @@ char* conclusion(Regle r){
 /**
  * ajout_proposition : ajoute une proposition à une règle (liste chaînées de proposition)
  * @param Regle r, string prop
- * @return void
+ * @return Regle
  */ 
 
 Regle ajout_proposition(Regle r, char* prop){

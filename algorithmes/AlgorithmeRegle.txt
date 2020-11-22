@@ -17,19 +17,100 @@ est_vide(Regle r) : Booléen
     fin sinon
     FIN
 
-ajout_proposition(Regle r, string prop)
+contenu(Regle r) : string
     DEBUT
     si est_vide(r) alors
-            nouveau(r)
+        retourner indéfini
+    sinon
+        retourner contenu(r)
+    fin sinon
+    FIN
+
+conclusion(Regle r) : string
+    DEBUT
+    si est_vide(r) alors
+        retourner indéfini
+    sinon
+        tant que non est_vide(suiv(r)) faire
+            r <- suiv(r)
+        fin tant que
+        retourner contenu(r)
+    fin sinon
+    FIN
+    
+ajout_proposition(Regle r, string prop) : Regle
+    DEBUT
+    si est_vide(r) alors
+            nouvelleProposition(r)
             contenu(r) <- prop
             suiv(r) <- indéfini
         sinon
             tant que non est_vide(r) faire
                 r <- suiv(r)
             fin tant que
-            nouveau(nouvProp)
+            nouvelleProposition(nouvProp)
             contenu(nouvProp) <- prop
             suiv(nouvProp) <- indéfini
             suiv(r) <- nouvProp
         }
+        retourner r
     FIN
+
+ajout_conclusion(Regle r, string ccl): Booléen
+    DEBUT
+    si est_vide(r) alors
+        retourner FAUX
+    sinon
+        tant que non est_vide(suiv(r)) faire
+            r <- suiv(r)
+        fin tant que
+        nouvelleProposition(nouvProp)
+        contenu(nouvProp) <- ccl
+        suiv(nouvProp) <- indéfini
+        retourner VRAI
+    fin sinon
+    FIN
+
+contient(Regle r, string prop) : Booléen
+    DEBUT
+    si est_vide(r) alors
+        retourner FAUX
+    sinon 
+        si contenu(r) == prop alors
+            retourner VRAI
+        sinon
+            retourner contient(suiv(r),prop)
+        fin sinon
+    fin sinon
+    FIN
+
+suppr_prop(Regle r, Regle p, string prop) : Regle
+    DEBUT
+    si est_vide(r) ou est_vide(p) alors
+        retourner indéfini
+    sinon
+        si contenu(r) == prop alors
+            nouvelleProposition(tmp) <- suiv(r)
+            libérer(r)
+            retourner tmp
+        sinon
+            si est_vide(suiv(p)) alors
+                retourner indéfini
+            sinon
+                si contenu(suiv(p)) == prop alors
+                    nouvelleProposition(tmp) <- indéfini
+                    si non est_vide(suiv(suiv(p))) alors
+                        tmp <- suiv(suiv(p))
+                    fin si
+                    libérer(suiv(p))
+                    suiv(p) <- tmp
+                    retourner r
+                sinon
+                    retourner suppr_prop(r,suiv(p),prop)
+                fin sinon
+            fin sinon
+        fin sinon
+    fin sinon
+    FIN
+
+
