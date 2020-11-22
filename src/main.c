@@ -1,10 +1,10 @@
-#include "regle.h"
+#include "./../lib/regle.h"
 
 int main(){
 
     printf("Creation regle vide");
     Regle r = creer_regle();
-    char input[40]; //accepte pas les espaces
+    char input[40];
 
     printf("\nAjout proposition 1 :");
     gets(input);
@@ -36,13 +36,16 @@ int main(){
 
     printf("\nProposition a supprimer :");
     gets(input);
-    if(!(r = suppr_prop(r,r,input))){
+    Regle tmp = suppr_prop(r,r,input);
+    if(tmp==NULL){
         printf("\nCet proposition n'est pas contenu dans cette règle");
+    }else{
+        r = tmp;
     }
 
     afficher_regle(r);
 
-    Regle tmp=NULL;
+    tmp=NULL;
     while(!est_vide(r->suiv)){
         tmp = r->suiv;
         free(r);

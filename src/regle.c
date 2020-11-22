@@ -1,4 +1,4 @@
-#include "regle.h"
+#include "./../lib/regle.h"
 
 /**
  * creer_regle : créer un pointeur (de valeur nulle) sur une liste de proposition
@@ -138,13 +138,20 @@ Regle suppr_prop(Regle r, Regle p, char* prop){
             free(r);
             return tmp;
         }else{
-            if(strcmp(p->suiv->contenu,prop)==0){
-                Regle tmp = p->suiv->suiv;
-                free(p->suiv);
-                p->suiv = tmp;
-                return r;
+            if(est_vide(p->suiv)){
+                return NULL;
             }else{
-                return suppr_prop(r,p->suiv,prop);
+                if(strcmp(p->suiv->contenu,prop)==0){
+                    Regle tmp = NULL;
+                    if(!est_vide(p->suiv->suiv)){
+                        tmp = p->suiv->suiv;
+                    }
+                    free(p->suiv);
+                    p->suiv = tmp;
+                    return r;
+                }else{
+                    return suppr_prop(r,p->suiv,prop);
+                }
             }
         }
     }
