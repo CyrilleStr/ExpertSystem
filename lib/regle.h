@@ -105,6 +105,12 @@ bool contient(Premisse p, char* prop);
  */
 Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop);
 
+/**
+ * @brief Libérer l'espace alloué en mémoire
+ * 
+ * @param r Regle
+ */
+void libere_regle(Regle r);
 
 void afficher_regle(Regle r);
 

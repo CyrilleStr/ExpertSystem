@@ -49,7 +49,6 @@ Regle ajout_proposition(Regle r, char* prop){
         strcpy(nouvProp->contenu,prop);
         nouvProp->suiv = NULL;
         tmp->suiv = nouvProp;
-
     } else {
         printf("\nErreur: La proposition existe deja dans cette regle.");
     }
@@ -76,11 +75,6 @@ bool contient(Premisse p, char* prop){
     }
 }
 
-/**
- * suppr_prop : supprime une proposition de la prémisse d'une règle
- * @param Regle r, Regle p(permet de traverser une règle en gardant r intacte), string prop
- * @return Regle (La règle si la proposition est contenu dans la règle et a bien été supprimé et NULL si non)
-*/
 Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
     if(p == NULL){
         return NULL;
@@ -107,6 +101,26 @@ Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
                 }
             }
         }
+    }
+}
+
+void libere_regle(Regle r){
+    if(r.prem == NULL && r.ccl ==NULL){
+        printf("\nPas d'espace à libérer, la règle est déjà vide");
+    }else{
+        if(r.ccl != NULL){
+            free(r.ccl);
+        }
+        Premisse curseur = NULL;
+        Premisse tmp = NULL;
+        curseur = r.prem;
+        while(curseur != NULL){
+            tmp = curseur->suiv;
+            free(curseur->contenu);
+            free(curseur);
+            curseur = tmp;
+        }
+        printf("\nEspace libéré correctement");
     }
 }
 
