@@ -106,7 +106,7 @@ bool contient(Premisse p, char* prop);
 Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop);
 
 /**
- * @brief Libérer l'espace alloué en mémoire
+ * @brief Libérer l'espace alloué en mémoire à une règle
  * 
  * @param r Regle
  */

@@ -28,6 +28,22 @@ Regle regle_tete(BC b){
     return b->rgl;
 }
 
+void liberer_base(BC b){
+    if(b==NULL){
+        printf("\nPas d'espace à liberer, la base de connaissance est deja vide");
+    }else{
+        BC tmp = NULL;
+        BC curseur = b;
+        while(curseur != NULL){
+            tmp = curseur->suiv;
+            libere_regle(curseur->rgl);
+            free(curseur);
+            curseur = tmp;
+        }
+        printf("\nBase de connaissance liberee correctement");
+    }
+}
+
 void afficher_bc(BC b){
     if(b==NULL){
         printf("\nLa base de connaissance est vide");

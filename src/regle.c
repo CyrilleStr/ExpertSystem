@@ -106,7 +106,7 @@ Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
 
 void libere_regle(Regle r){
     if(r.prem == NULL && r.ccl ==NULL){
-        printf("\nPas d'espace à libérer, la règle est déjà vide");
+        printf("\nPas d'espace à liberer, la regle est deja vide");
     }else{
         if(r.ccl != NULL){
             free(r.ccl);
@@ -120,35 +120,35 @@ void libere_regle(Regle r){
             free(curseur);
             curseur = tmp;
         }
-        printf("\nEspace libéré correctement");
+        printf("\nRegle libere correctement");
     }
 }
 
 void afficher_regle(Regle r){
     if(est_vide(r)){
-        printf("\n\nLa regle est vide");
+        printf("\n\n\tLa regle est vide");
     }else{
-        printf("\n\n***Regle***");
+        printf("\n\n\t***Regle***");
         // Prémisse
         if(r.prem->contenu == NULL){
-            printf("\nLa prémisse est vide.");
+            printf("\n\tLa premisse est vide.");
         } else {
             Premisse cursor = r.prem;
             int i = 1;
-            printf("\nPremisse :");
+            printf("\n\tPremisse :");
             while(cursor != NULL){
-                printf("\n\t%d : %s",i,cursor->contenu);
+                printf("\n\t\t%d : %s",i,cursor->contenu);
                 cursor = cursor->suiv;
                 i++;
             }
         }
         // Conclusion
         if(r.ccl == NULL){
-            printf("\nCette regle ne contient pas de conclusion.");
+            printf("\n\tCette regle ne contient pas de conclusion.");
         } else {
-            printf("\nConclusion : \n\t%s",r.ccl);
+            printf("\n\tConclusion : \n\t\t%s",r.ccl);
         }
-        printf("\n***********");
+        printf("\n\t***********");
     }
 }
 

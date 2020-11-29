@@ -48,6 +48,13 @@ BC ajout_regle(BC b, Regle r);
 Regle regle_tete(BC b);
 
 /**
+ * @brief Libére l'espace alloué en mémoire à une base de connaissance
+ * 
+ * @param b base en question
+ */
+void liberer_base(BC b);
+
+/**
  * afficher_bc : affiche les éléments d'une base de connaissance
  * @param b base en question
  * @return void

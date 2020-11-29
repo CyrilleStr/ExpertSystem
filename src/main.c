@@ -47,19 +47,17 @@ int main(){
     afficher_regle(r3);
 
     // Création de la base de connaissance
-    /*
+    
     BC b = creer_base();
     b = ajout_regle(b,r1);
     b = ajout_regle(b,r2);
     afficher_regle(b->suiv->rgl);
     b = ajout_regle(b,r3);
 
-    afficher_bc(b); */
+    afficher_bc(b); 
 
     // Libération de l'espace 
-    libere_regle(r1);
-    libere_regle(r2);
-    libere_regle(r3);
+    liberer_base(b);
     
     return 0;
 }
