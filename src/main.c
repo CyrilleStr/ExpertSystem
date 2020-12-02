@@ -14,9 +14,9 @@ int main(){
     r1 = ajout_proposition(r1,"mal de tete");
     r1 = ajout_conclusion(r1,"gastro");
 
-    r2 = ajout_proposition(r2,"slips sals");
+    r2 = ajout_proposition(r2,"slips sales");
     r2 = ajout_proposition(r2,"pue du cul");
-    r2 = ajout_conclusion(r2,"ne s'essuie pas");
+    r2 = ajout_conclusion(r2,"manque de PQ");
 
     r3 = ajout_proposition(r3,"accro a la weed");
     r3 = ajout_proposition(r3,"accro a la meth");
@@ -32,24 +32,28 @@ int main(){
     // Déclaration d'une base de fait
 
     BF bf = creer_bf();
-    bf = ajout_fait_bf(bf,"accro a la meth");
-    bf = ajout_fait_bf(bf,"accro a la morphine");
+    bf = ajout_fait_bf(bf,"bcp de bouton");
     bf = ajout_fait_bf(bf,"accro au taz");
-    bf = ajout_fait_bf(bf,"mal de tete");
+    bf = ajout_fait_bf(bf,"accro a la morphine");
+    bf = ajout_fait_bf(bf,"accro a la weed");
+    bf = ajout_fait_bf(bf,"pue du");
+    bf = ajout_fait_bf(bf,"slips sales");
 
+
+    afficher_bc(bc);
     afficher_bf(bf);
 
     // Moteur d'inference
 
-    BF resultats = creer_bf();
-    resultats = moteur_inference(bc,bf);
+    BF faits_verifies = creer_bf();
+    faits_verifies = moteur_inference(bc,bf);
 
-    printf("\n\nResultats :");
-    afficher_bf(resultats);
+    printf("\n\nFaits verifies :");
+    afficher_bf(faits_verifies);
 
     // Libération de l'espace 
     suppr_bc(bc);
     suppr_bf(bf);
-    suppr_bf(resultats);
+    suppr_bf(faits_verifies);
     return 0;
 }

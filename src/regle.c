@@ -84,23 +84,26 @@ Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
         return NULL;
     } else {
         // Première proposition
-        Premisse pointeur = p->suiv;
         if(strcmp(p->contenu, prop) == 0){ // La proposition à supprimer est la première
+            if(prem_est_vide(p->suiv)){ // il n'y a qu'une seule proposition
+                return NULL;
+            }else{
+                Premisse tmp = p->suiv;
+                free(p->contenu);
+                free(p);
+                return tmp;
+            }
             
-            free(p->contenu);
-            free(p);
-            return pointeur;
         } else {
             // Propositions suivantes
-            if(prem_est_vide(pointeur)){
-                return NULL; // La prémisse contient une seule proposition et la première proposition ne correspondait pas.
+            if(prem_est_vide(p->suiv)){ // La prémisse contient une seule proposition et la première proposition ne correspondait pas
+                return ptrOriginal;
             } else {
                 if(strcmp(p->suiv->contenu, prop) == 0){ // Le suivant est à supprimer
-                    
-                    pointeur = p->suiv->suiv;
+                    Premisse tmp = p->suiv->suiv;
                     free(p->suiv->contenu);
                     free(p->suiv);
-                    p->suiv = pointeur;
+                    p->suiv = tmp;
                     return ptrOriginal;
                 }else{
                     return suppr_prop(p->suiv, ptrOriginal, prop);
