@@ -15,13 +15,13 @@
 typedef struct proposition {
     char* contenu;
     struct proposition* suiv;
-} Propostition;
+} Proposition;
 
 /**
  * @brief Définition d'une prémisse comme une liste chaînée de propositions (pour une meilleure lisibilité du code)
  * 
  */
-typedef Propostition* Premisse;
+typedef Proposition* Premisse;
 
 /**
  * @brief Définition d'une conclusion comme étant une chaîne de caractères (meilleure lisibilité du code)
@@ -49,11 +49,20 @@ typedef struct regle {
 Regle creer_regle();
 
 /**
- * est_vide : test si la prémisse d'une Règle est vide
+ * est_vide : test si la prémisse et la conlsuion d'une Règle sont vides
  * @param Regle r
  * @return Boolean (TRUE si vide et FALSE si non vide)
  */
-bool est_vide(Regle r);
+bool regle_est_vide(Regle r);
+
+/**
+ * @brief test si une prémisse est vide
+ * 
+ * @param p Premsisse
+ * @return true si p est vide
+ * @return false si p n'est pas vide
+ */
+bool prem_est_vide(Premisse p);
 
 /**
  * contenu : accède à la proposition se trouvant en tête d'une prémisse
@@ -80,8 +89,9 @@ Regle ajout_proposition(Regle r, char* prop);
 
 /**
  * ajout_conclusion : ajoute une conlusion à la fin d'une regle (liste chaînées de proposition)
- * @param Regle r, string ccl
- * @return Boolean (TRUE si l'ajout a été fait et FALSE si l'ajout a échoué)
+ * @param Regle r
+ * @param ccl string
+ * @return Regle
  */ 
 Regle ajout_conclusion(Regle r, char* ccl);
 
@@ -99,19 +109,24 @@ bool contient(Premisse p, char* prop);
  * @brief Supprime une proposition d'une prémisse
  * 
  * @param p prémisse
- * @param ptrOriginal idem que p
+ * @param ptrOriginal prémisse (identique à p, lors du premier à appel de la fonction)
  * @param prop proposition à supprimer
  * @return Premisse prémisse mise à jour
  */
 Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop);
 
 /**
- * @brief Libérer l'espace alloué en mémoire à une règle
+ * @brief Libére l'espace alloué en mémoire à une règle
  * 
  * @param r Regle
  */
-void libere_regle(Regle r);
+void suppr_regle(Regle r);
 
+/**
+ * @brief Affiche le contenu d'une règle
+ * 
+ * @param r Regle
+ */
 void afficher_regle(Regle r);
 
 #endif

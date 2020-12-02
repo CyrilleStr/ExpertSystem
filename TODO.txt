@@ -1,7 +1,11 @@
-Créer fct premisse_vide
-Refaire la fonction prop
-    - Rajouter
-Créer fct supprimer_regle
+moteur_inference :
+- créer tt la librairies correspondant au type BF
+- finir moteur_inference
 
-Ooptionnel
-Modifier suppr_prop pr pouvoir supprimer la première prop d'une prémisse
+Problème :
+- limite aléatoire de caractère pour ajout_proposition() sinon ça plante
+- bc.h
+typedef struct elemRegle{
+    Regle rgl; => Regle* rlg; // pour les byAdressParameter(pour moteur_inference())
+    struct elemRegle* suiv;
+}ElemRegle;

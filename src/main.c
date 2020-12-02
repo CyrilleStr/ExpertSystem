@@ -1,63 +1,55 @@
 #include "regle.h"
 #include "bc.h"
+#include "moteur_inference.h"
 
 int main(){
 
-    char input[255];
+    // Déclaration d'une base de connaissance
 
-    // Création de 3 règles
-
-    printf("Creation regle vide");
     Regle r1 = creer_regle();
-    
-    printf("\nAjout proposition 1 : ");
-    gets(input);
-    r1 = ajout_proposition(r1,input);
-    
-    printf("\nAjout conclusion: ");
-    gets(input);
-    r1 = ajout_conclusion(r1, input);
-
-    afficher_regle(r1);
-
-    printf("\nCreation regle vide");
     Regle r2 = creer_regle();
-
-    printf("\nAjout proposition 2 : ");
-    gets(input);
-    r2 = ajout_proposition(r2,input);
-    
-    printf("\nAjout conclusion: ");
-    gets(input);
-    r2 = ajout_conclusion(r2, input);
-
-    afficher_regle(r2);
-
-    printf("\nCreation regle vide");
     Regle r3 = creer_regle();
 
-    printf("\nAjout proposition 2 : ");
-    gets(input);
-    r3 = ajout_proposition(r3,input);
-    
-    printf("\nAjout conclusion: ");
-    gets(input);
-    r3 = ajout_conclusion(r3, input);
+    r1 = ajout_proposition(r1,"bcp de bouton");
+    r1 = ajout_proposition(r1,"mal de tete");
+    r1 = ajout_conclusion(r1,"gastro");
 
-    afficher_regle(r3);
+    r2 = ajout_proposition(r2,"slips sals");
+    r2 = ajout_proposition(r2,"pue du cul");
+    r2 = ajout_conclusion(r2,"ne s'essuie pas");
 
-    // Création de la base de connaissance
-    
-    BC b = creer_base();
-    b = ajout_regle(b,r1);
-    b = ajout_regle(b,r2);
-    afficher_regle(b->suiv->rgl);
-    b = ajout_regle(b,r3);
+    r3 = ajout_proposition(r3,"accro a la weed");
+    r3 = ajout_proposition(r3,"accro a la meth");
+    r3 = ajout_proposition(r3,"accro a la morphine");
+    r3 = ajout_proposition(r3,"accro au taz");
+    r3 = ajout_conclusion(r3,"junkie");
 
-    afficher_bc(b); 
+    BC bc = creer_bc();
+    bc = ajout_regle_bc(bc,r1);
+    bc = ajout_regle_bc(bc,r2);
+    bc = ajout_regle_bc(bc,r3); 
+
+    // Déclaration d'une base de fait
+
+    BF bf = creer_bf();
+    bf = ajout_fait_bf(bf,"accro a la meth");
+    bf = ajout_fait_bf(bf,"accro a la morphine");
+    bf = ajout_fait_bf(bf,"accro au taz");
+    bf = ajout_fait_bf(bf,"mal de tete");
+
+    afficher_bf(bf);
+
+    // Moteur d'inference
+
+    BF resultats = creer_bf();
+    resultats = moteur_inference(bc,bf);
+
+    printf("\n\nResultats :");
+    afficher_bf(resultats);
 
     // Libération de l'espace 
-    liberer_base(b);
-    
+    suppr_bc(bc);
+    suppr_bf(bf);
+    suppr_bf(resultats);
     return 0;
 }

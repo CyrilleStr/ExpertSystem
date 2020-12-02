@@ -1,5 +1,5 @@
-#ifndef bc
-#define bc
+#ifndef BASE_CONNAISSANCE
+#define BASE_CONNAISSANCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,38 +26,49 @@ typedef ElemRegle* BC;
 /***** Définition des prototypes *****/
 
 /**
- * creer_base : créer un pointeur sur une base comportant une seule règle vide
- * @param
+ * @brief Créer un pointeur sur une base comportant une seule règle vide
+ * 
  * @return BC
  */
-BC creer_base();
+BC creer_bc();
 
 /**
- * ajout_regle : ajoute une règle à une base en queue
- * @param b base en question
- * @param r règle à ajouter
+ * @brief Test si une base de connaissances est vide 
+ * 
+ * @param b BC
+ * @return true la base de connsaissances est vide 
+ * @return false la base de connaissances n'est pas vide
+ */
+bool bc_est_vide(BC b);
+
+/**
+ * @brief Ajoute une règle à une base en queue
+ * 
+ * @param b BF
+ * @param r Regle
  * @return BC base mise à jour
  */
-BC ajout_regle(BC b, Regle r);
+BC ajout_regle_bc(BC b, Regle r);
 
 /**
- * regle_tete : accède à la règle se trouvant en tête de la base
- * @param b base en question
+ * @brief Accède à la règle se trouvant en tête de la base
+ * 
+ * @param b BF
  * @return Regle règle de la base
  */
-Regle regle_tete(BC b);
+Regle regle_tete_bc(BC b);
 
 /**
  * @brief Libére l'espace alloué en mémoire à une base de connaissance
  * 
- * @param b base en question
+ * @param b BF
  */
-void liberer_base(BC b);
+void suppr_bc(BC b);
 
 /**
- * afficher_bc : affiche les éléments d'une base de connaissance
- * @param b base en question
- * @return void
+ * @brief Affiche les éléments d'une base de connaissance
+ * 
+ * @param b BFn
  */
 void afficher_bc(BC b);
 
