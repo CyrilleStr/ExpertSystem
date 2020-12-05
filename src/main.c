@@ -32,11 +32,11 @@ int main(){
     // Déclaration d'une base de fait
 
     BF bf = creer_bf();
-    bf = ajout_fait_bf(bf,"bcp de bouton");
     bf = ajout_fait_bf(bf,"accro au taz");
     bf = ajout_fait_bf(bf,"accro a la morphine");
     bf = ajout_fait_bf(bf,"accro a la weed");
-    bf = ajout_fait_bf(bf,"pue du");
+    bf = ajout_fait_bf(bf,"accro a la meth");
+    bf = ajout_fait_bf(bf,"pue du cul");
     bf = ajout_fait_bf(bf,"slips sales");
 
 
