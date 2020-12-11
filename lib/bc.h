@@ -44,9 +44,9 @@ bool bc_est_vide(BC b);
 /**
  * @brief Ajoute une règle à une base en queue
  * 
- * @param b BF
+ * @param b BC
  * @param r Regle
- * @return BC base mise à jour
+ * @return BC La base mise à jour
  */
 BC ajout_regle_bc(BC b, Regle r);
 
