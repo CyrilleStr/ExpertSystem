@@ -1,7 +1,7 @@
 CFLAGS=-W -Wall -Werror -std=c99 -I lib/
 EXEC=main
 
-all: $(EXEC)
+all: main jeu1
 
 main: build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/main.o
 	gcc -o main build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/main.o
