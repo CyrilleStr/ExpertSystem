@@ -10,18 +10,25 @@ int main(){
     Regle r2 = creer_regle();
     Regle r3 = creer_regle();
 
-    r1 = ajout_proposition(r1,"bcp de bouton");
-    r1 = ajout_proposition(r1,"mal de tete");
-    r1 = ajout_conclusion(r1,"gastro");
+    r1 = ajout_proposition(r1,"fievre");
+    r1 = ajout_proposition(r1,"perte de gout");
+    r1 = ajout_proposition(r1,"toux");
+    r1 = ajout_conclusion(r1,"covid");
 
-    r2 = ajout_proposition(r2,"slips sales");
-    r2 = ajout_proposition(r2,"pue du cul");
-    r2 = ajout_conclusion(r2,"manque de PQ");
+    r2 = ajout_proposition(r2,"epuisements");
+    r2 = ajout_proposition(r2,"maux de tete");
+    r2 = ajout_proposition(r2,"maux de ventre");
+    r2 = ajout_proposition(r2,"eternuments");
+    r2 = ajout_conclusion(r2,"grippe");
 
-    r3 = ajout_proposition(r3,"f"); /* Incompréhensible, diarrhee et nausées marchent pas */
-    r3 = ajout_proposition(r3,"");
-    r3 = ajout_proposition(r3,"d");
-    r3 = ajout_conclusion(r3,"q");
+
+    r3 = ajout_proposition(r3,"diarrhee");
+    printf("\ndebug");
+    r3 = ajout_proposition(r3,"qsdf");
+    printf("\ndebug");
+    r3 = ajout_proposition(r3,"fievre");
+    printf("\ndebug");
+    r3 = ajout_conclusion(r3,"gastro enterite");
 
     BC bc = creer_bc();
     bc = ajout_regle_bc(bc,r1);
