@@ -1,10 +1,13 @@
-CFLAGS=-W  -I lib/
+CFLAGS=-W -Wall -std=c99 -g -I lib/
 EXEC=main
 
-all: $(EXEC)
+all: main jeu1
 
-main: build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/interface.o build/main.o
-	gcc -o main build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/interface.o build/main.o
+main: build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/main.o
+	gcc -o main build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/main.o
+jeu1: build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/jeu1.o
+	gcc -o jeu1 build/regle.o build/bc.o build/bf.o build/moteur_inference.o build/jeu1.o
+
 build/regle.o: src/regle.c
 	gcc -o build/regle.o -c src/regle.c $(CFLAGS)
 build/bc.o: src/bc.c
@@ -17,7 +20,9 @@ build/interface.o: src/interface.c
 	gcc -o build/interface.o -c src/interface.c $(CFLAGS)
 build/main.o: src/main.c lib/regle.h lib/bc.h lib/bf.h lib/moteur_inference.h lib/interface.h
 	gcc -o build/main.o -c src/main.c $(CFLAGS)
+build/jeu1.o: src/jeu1.c lib/regle.h lib/bc.h lib/bf.h lib/moteur_inference.h
+	gcc -o build/jeu1.o -c src/jeu1.c $(CFLAGS)
 
 clean:
-	del *.exe build\*.o
-	
+	del build\*.o
+	del *.exe
