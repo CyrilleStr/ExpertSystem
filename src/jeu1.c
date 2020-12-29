@@ -22,13 +22,10 @@ int main(){
     r2 = ajout_conclusion(r2,"grippe");
 
 
-    r3 = ajout_proposition(r3,"diarrhee");
-    printf("\ndebug");
-    r3 = ajout_proposition(r3,"qsdf");
-    printf("\ndebug");
-    r3 = ajout_proposition(r3,"fievre");
-    printf("\ndebug");
-    r3 = ajout_conclusion(r3,"gastro enterite");
+    r3 = ajout_proposition(r3,"sdf");
+    r3 = ajout_proposition(r3,"f");
+    r3 = ajout_proposition(r3,"ds");
+    r3 = ajout_conclusion(r3,"sdf");
 
     BC bc = creer_bc();
     bc = ajout_regle_bc(bc,r1);
@@ -38,12 +35,12 @@ int main(){
     // Déclaration d'une base de fait
 
     BF bf = creer_bf();
-    bf = ajout_fait_bf(bf,"accro au taz");
-    bf = ajout_fait_bf(bf,"accro a la morphine");
-    bf = ajout_fait_bf(bf,"accro a la weed");
+    bf = ajout_fait_bf(bf,"epuisements");
+    bf = ajout_fait_bf(bf,"maux de tete");
+    bf = ajout_fait_bf(bf,"maux de ventre");
     bf = ajout_fait_bf(bf,"accro a la meth");
-    bf = ajout_fait_bf(bf,"pue du cul");
-    bf = ajout_fait_bf(bf,"slips sales");
+    bf = ajout_fait_bf(bf,"eternuments");
+    bf = ajout_fait_bf(bf,"jambe cassee");
 
 
     afficher_bc(bc);

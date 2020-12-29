@@ -51,8 +51,8 @@ void suppr_bf(BF b){
         BF tmp = NULL;
         while(!bf_est_vide(curseur)){
             tmp = curseur->suiv;
-            free(curseur->contenu);
-            free(curseur);
+            //free(curseur->contenu);
+            //free(curseur);
             curseur = tmp;
         }
         printf("\nBase de faits supprimee correctement");

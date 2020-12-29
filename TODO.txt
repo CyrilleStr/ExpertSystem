@@ -1,4 +1,3 @@
 
 Problème :
-- limite aléatoire de caractère pour ajout_proposition() sinon ça plante
-- bc.h
+- limite aléatoire de caractère pour ajout_proposition() sinon ça plantes

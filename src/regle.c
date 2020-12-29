@@ -89,8 +89,8 @@ Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
                 return NULL;
             }else{
                 Premisse tmp = p->suiv;
-                free(p->contenu);
-                free(p);
+                //free(p->contenu);
+                //free(p);
                 return tmp;
             }
             
@@ -101,8 +101,8 @@ Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop){
             } else {
                 if(strcmp(p->suiv->contenu, prop) == 0){ // Le suivant est à supprimer
                     Premisse tmp = p->suiv->suiv;
-                    free(p->suiv->contenu);
-                    free(p->suiv);
+                    //free(p->suiv->contenu);
+                    //free(p->suiv);
                     p->suiv = tmp;
                     return ptrOriginal;
                 }else{
@@ -118,14 +118,14 @@ void suppr_regle(Regle r){
         printf("\nPas d'espace à liberer, la regle est deja vide");
     }else{
         if(r.ccl != NULL){
-            free(r.ccl);
+            //free(r.ccl);
         }
         Premisse curseur = r.prem;
         Premisse tmp = NULL;
         while(!prem_est_vide(curseur)){
             tmp = curseur->suiv;
-            free(curseur->contenu);
-            free(curseur);
+            //free(curseur->contenu);
+            //free(curseur);
             curseur = tmp;
         }
     }

@@ -1,4 +1,4 @@
-CFLAGS=-W -Wall -Werror -std=c99 -I lib/
+CFLAGS=-W -Wall -std=c99 -g -I lib/
 EXEC=main
 
 all: main jeu1
