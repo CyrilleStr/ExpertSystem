@@ -18,10 +18,10 @@ int main(){
     r2 = ajout_proposition(r2,"pue du cul");
     r2 = ajout_conclusion(r2,"manque de PQ");
 
-    r3 = ajout_proposition(r3,"f"); /* Incompréhensible, diarrhee et nausées marchent pas */
-    r3 = ajout_proposition(r3,"");
-    r3 = ajout_proposition(r3,"d");
-    r3 = ajout_conclusion(r3,"q");
+    r3 = ajout_proposition(r3,"diarrhee");
+    r3 = ajout_proposition(r3,"éternuments");
+    r3 = ajout_proposition(r3,"fievre");
+    r3 = ajout_conclusion(r3,"gastro enterite");
 
     BC bc = creer_bc();
     bc = ajout_regle_bc(bc,r1);
