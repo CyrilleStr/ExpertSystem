@@ -9,7 +9,7 @@ Règle : liste de proposition, dont le dernier élément est la conclusion de la
 - nouvelleRègle : élément de type Règle
 
 * DONNEES
-
+/
 * RESULTAT(S)
 - nouvelleRegle
 
@@ -18,27 +18,41 @@ nouvelleRegle <- new(Regle)
 retourner nouvelleRegle
 * FIN
 
+** VERIFIER SI UNE REGLE EST VIDE **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle à tester
 
-est_vide(Regle r) : Booléen
-    DEBUT 
+* DEBUT
     si r est indéfini alors
         retourner VRAI
     sinon 
         retourner FAUX
     fin sinon
-    FIN
+* FIN
 
-contenu(Regle r) : string
-    DEBUT
+** RENVOYER LE CONTENU D'UNE REGLE **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle à renvoyer
+
+* DEBUT
     si est_vide(r) alors
         retourner indéfini
     sinon
         retourner contenu(r)
     fin sinon
-    FIN
+* FIN
 
-conclusion(Regle r) : string
-    DEBUT
+** RENVOYER LA CONCLUSION D'UNE REGLE **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle en question
+
+* DEBUT
     si est_vide(r) alors
         retourner indéfini
     sinon
@@ -47,10 +61,16 @@ conclusion(Regle r) : string
         fin tant que
         retourner contenu(r)
     fin sinon
-    FIN
+* FIN
+
+** AJOUTER UNE PROPOSITION **
+* LEXIQUE
+
+* DONNEES
+- r : Règle à modifier
+- prop : Proposition à ajouter
     
-ajout_proposition(Regle r, string prop) : Regle
-    DEBUT
+* DEBUT
     si est_vide(r) alors
             nouvelleProposition(r)
             contenu(r) <- prop
@@ -65,10 +85,16 @@ ajout_proposition(Regle r, string prop) : Regle
             suiv(r) <- nouvProp
         }
         retourner r
-    FIN
+* FIN
 
-ajout_conclusion(Regle r, string ccl): Booléen
-    DEBUT
+** AJOUTER UNE CONCLUSION **
+* LEXIQUE
+
+* DONNEES
+- r : Règle à modifier
+- ccl : conclusion à ajouter
+
+* DEBUT
     si est_vide(r) alors
         retourner FAUX
     sinon
@@ -80,10 +106,16 @@ ajout_conclusion(Regle r, string ccl): Booléen
         suiv(nouvProp) <- indéfini
         retourner VRAI
     fin sinon
-    FIN
+* FIN
 
-contient(Regle r, string prop) : Booléen
-    DEBUT
+** VERIFIER SI UNE REGLE CONTIENT UNE PROPOSITION **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle à tester
+- prop : Proposition à trouver
+
+* DEBUT
     si est_vide(r) alors
         retourner FAUX
     sinon 
@@ -93,10 +125,17 @@ contient(Regle r, string prop) : Booléen
             retourner contient(suiv(r),prop)
         fin sinon
     fin sinon
-    FIN
+* FIN
 
-suppr_prop(Regle r, Regle p, string prop) : Regle
-    DEBUT
+** SUPPRIMER UNE PROPOSITION **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle à modifier
+- p : Pointeur original sur la règle
+- prop : Proposition à supprimer
+
+* DEBUT
     si est_vide(r) ou est_vide(p) alors
         retourner indéfini
     sinon
@@ -122,6 +161,6 @@ suppr_prop(Regle r, Regle p, string prop) : Regle
             fin sinon
         fin sinon
     fin sinon
-    FIN
+* FIN
 
 
