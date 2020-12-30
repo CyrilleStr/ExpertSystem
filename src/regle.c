@@ -1,4 +1,4 @@
-#include "regle.h"
+#include <regle.h>
 
 Regle creer_regle(){
     Regle nouvR;

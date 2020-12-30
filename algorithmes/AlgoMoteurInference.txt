@@ -1,0 +1,47 @@
+**** LEXIQUE DE LA LIBRAIRIE ****
+
+Cette libraire utilise des alogrithmes définis dans AlgoRegle.txt 
+Fait : une chaîne de caractère
+Base de connaissances : liste de règles (cf AlgoRegle.txt)
+Base faits : liste de faits
+
+**** ALGORITHMES ****
+
+** MOTEUR_INFERENCE **
+    LEXIQUE
+    - 
+
+    DONNEES
+    - bc : Base de connaissances
+    - bf : Base de faits
+
+    RESULTAT(S)
+    - base de faits
+
+    DEBUT
+        bfCurseur<Base de faits> <- creer_bf
+        bcCurseur<Base de connaissances> <- creer_bc
+        bcCurseur <- bc
+
+        Tant que non est_vide(bc) faire
+            bfCurseur <- bf
+            Tant que non est_vide(bfCurseur) faire 
+                Prémisse(Regle(bcCurseur)) <- suppr_prop(Prémisse(Regle(bcCurseur)),contenu(bfCurseur))
+
+                bfCurseur <- suiv(bfCurseur)
+            Fin Tant que
+            bcCurseur <- suiv(bcCurseur)
+        Fin tant que
+
+        bcCurseur <- bc
+        faits_verifies <base de faits> <- creer_bf
+
+        Tant que non est_vide(bcCurseur) faire
+            Si est_vide(Premisse(Regle(bcCurseur))) alors
+                faits_verifies <- ajout_fait_bf(faits_verifies,conclusion(regle(bcCurseur)))
+            Fin si
+            bcCurseur <- suiv(bcCurseur)
+        Fin tant que 
+
+        retourner faits_verifies
+    FIN

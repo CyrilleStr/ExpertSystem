@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "regle.h"
+#include <regle.h>
 
 /***** Définition des types *****/
 

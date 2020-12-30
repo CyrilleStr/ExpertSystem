@@ -1,4 +1,4 @@
-#include "bf.h"
+#include <bf.h>
 
 BF creer_bf(){
     BF b = NULL;

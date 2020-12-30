@@ -1,6 +1,6 @@
-#include "regle.h"
-#include "bc.h"
-#include "moteur_inference.h"
+#include <regle.h>
+#include <bc.h>
+#include <moteur_inference.h>
 
 int main(){
 

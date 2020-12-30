@@ -14,8 +14,8 @@ Règle : liste de proposition, dont le dernier élément est la conclusion de la
 - nouvelleRegle
 
 * DEBUT
-    nouvelleRegle <- new(Regle)
-    retourner nouvelleRegle
+nouvelleRegle <- new(Regle)
+retourner nouvelleRegle
 * FIN
 
 

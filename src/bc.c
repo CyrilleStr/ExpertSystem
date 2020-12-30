@@ -1,4 +1,4 @@
-#include "bc.h"
+#include <bc.h>
 
 BC creer_bc(){
     BC nouvBase = NULL;

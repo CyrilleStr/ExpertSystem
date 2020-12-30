@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "regle.h"
-#include "bc.h"
-#include "bf.h"
+#include <regle.h>
+#include <bc.h>
+#include <bf.h>
 
 /***** Définition des prototypes *****/
 
