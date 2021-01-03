@@ -1,3 +1,0 @@
-
-Problème :
-- limite aléatoire de caractère pour ajout_proposition() sinon ça plantes
