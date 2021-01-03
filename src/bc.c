@@ -1,4 +1,4 @@
-#include "bc.h"
+#include <bc.h>
 
 BC creer_bc(){
     BC nouvBase = NULL;
@@ -40,7 +40,7 @@ void suppr_bc(BC b){
         while(!bc_est_vide(curseur)){
             tmp = curseur->suiv;
             suppr_regle(curseur->rgl);
-            //free(curseur);
+            free(curseur);
             curseur = tmp;
         }
         printf("\nBase de connaissances supprimee correctement");

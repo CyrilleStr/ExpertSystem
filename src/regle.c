@@ -1,4 +1,4 @@
-#include "regle.h"
+#include <regle.h>
 
 Regle creer_regle(){
     Regle nouvR;
@@ -39,7 +39,7 @@ char* conclusion(Regle r){
 Regle ajout_proposition(Regle r, char* contenu){
     if(regle_est_vide(r)){ // Première proposition de la règle
         r.prem = (Premisse) malloc(sizeof(Proposition));
-        r.prem->contenu  = malloc(strlen(contenu));
+        r.prem->contenu  = malloc(strlen(contenu)+1);
         strcpy(r.prem->contenu,contenu);
         r.prem->suiv = NULL;
 
@@ -48,8 +48,9 @@ Regle ajout_proposition(Regle r, char* contenu){
         while(!prem_est_vide(cruseur->suiv)){
             cruseur = cruseur->suiv;
         }
+        
         Premisse nouvProp = (Premisse) malloc(sizeof(Proposition));
-        nouvProp->contenu = malloc(strlen(contenu));
+        nouvProp->contenu = malloc(strlen(contenu)+1);
         strcpy(nouvProp->contenu,contenu);
         nouvProp->suiv = NULL;
         cruseur->suiv = nouvProp;
@@ -61,7 +62,7 @@ Regle ajout_proposition(Regle r, char* contenu){
 }
 
 Regle ajout_conclusion(Regle r, char* contenu){
-    r.ccl = (char*) malloc(strlen(contenu));
+    r.ccl = (char*) malloc(strlen(contenu)+1);
     strcpy(r.ccl, contenu);
 
     return r;

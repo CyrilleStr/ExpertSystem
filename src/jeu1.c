@@ -1,11 +1,10 @@
-#include "regle.h"
-#include "bc.h"
-#include "moteur_inference.h"
+#include <regle.h>
+#include <bc.h>
+#include <moteur_inference.h>
 
 int main(){
-
-    // Déclaration d'une base de connaissance
-
+    
+   // Déclaration d'une base de connaissance
     Regle r1 = creer_regle();
     Regle r2 = creer_regle();
     Regle r3 = creer_regle();
@@ -21,11 +20,10 @@ int main(){
     r2 = ajout_proposition(r2,"eternuments");
     r2 = ajout_conclusion(r2,"grippe");
 
-
-    r3 = ajout_proposition(r3,"sdf");
-    r3 = ajout_proposition(r3,"f");
-    r3 = ajout_proposition(r3,"ds");
-    r3 = ajout_conclusion(r3,"sdf");
+    r3 = ajout_proposition(r3,"diarrhee");
+    r3 = ajout_proposition(r3,"nausees");
+    r3 = ajout_proposition(r3,"fievre");
+    r3 = ajout_conclusion(r3,"gastro enterite");
 
     BC bc = creer_bc();
     bc = ajout_regle_bc(bc,r1);
@@ -35,13 +33,11 @@ int main(){
     // Déclaration d'une base de fait
 
     BF bf = creer_bf();
-    bf = ajout_fait_bf(bf,"epuisements");
-    bf = ajout_fait_bf(bf,"maux de tete");
-    bf = ajout_fait_bf(bf,"maux de ventre");
-    bf = ajout_fait_bf(bf,"accro a la meth");
-    bf = ajout_fait_bf(bf,"eternuments");
-    bf = ajout_fait_bf(bf,"jambe cassee");
-
+    bf = ajout_fait_bf(bf,"perte de gout");
+    bf = ajout_fait_bf(bf,"nausees");
+    bf = ajout_fait_bf(bf,"diarrhee");
+    bf = ajout_fait_bf(bf,"fievre");
+    bf = ajout_fait_bf(bf,"toux");
 
     afficher_bc(bc);
     afficher_bf(bf);
