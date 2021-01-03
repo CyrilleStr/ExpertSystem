@@ -1,6 +1,7 @@
 #include <regle.h>
 #include <bc.h>
 #include <moteur_inference.h>
+#include <interface.h>
 
 int main(){
     
@@ -34,7 +35,9 @@ int main(){
     bf = ajout_fait_bf(bf,"est autodidacte");
 
     afficher_bc(bc);
+    pause();
     afficher_bf(bf);
+    pause();
 
     // Moteur d'inference
 
@@ -43,6 +46,7 @@ int main(){
 
     printf("\n\nFaits verifies :");
     afficher_bf(faits_verifies);
+    pause();
 
     // Libération de l'espace 
     suppr_bc(bc);

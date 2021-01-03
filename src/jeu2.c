@@ -1,6 +1,7 @@
 #include <regle.h>
 #include <bc.h>
 #include <moteur_inference.h>
+#include <interface.h>
 
 int main(){
     
@@ -13,7 +14,7 @@ int main(){
     r1 = ajout_proposition(r1,"LO21: plus de la moyenne");
     r1 = ajout_conclusion(r1,"6 credits valides");
 
-    r2 = ajout_proposition(r2,"120 crédits ECTS valides");
+    r2 = ajout_proposition(r2,"120 credits ECTS valides");
     r2 = ajout_proposition(r2,"aucune absence");
     r2 = ajout_proposition(r2,"aucun retard");
     r2 = ajout_conclusion(r2,"Passe en branche");
@@ -38,7 +39,9 @@ int main(){
     bf = ajout_fait_bf(bf,"aucun retard");
 
     afficher_bc(bc);
+    pause();
     afficher_bf(bf);
+    pause();
 
     // Moteur d'inference
 
@@ -47,6 +50,7 @@ int main(){
 
     printf("\n\nFaits verifies :");
     afficher_bf(faits_verifies);
+    pause();
 
     // Libération de l'espace 
     suppr_bc(bc);

@@ -12,7 +12,8 @@ BC remplir_bc(BC bc){
         // Menu
         choix = 0;
         while(choix != 1 && choix != 2){
-            printf("\nQue voulez vous faire ?\n1. Ajouter une regle\n2. Quitter\nChoix :");
+            effacer_terminal();
+            printf("\nQue voulez vous faire ?\n1. Ajouter une regle\n2. Ajouter la conclusion\nChoix :");
             gets(input);
             choix = atoi(input);
         }
@@ -21,6 +22,7 @@ BC remplir_bc(BC bc){
         {
         case 1:
             compteurRegle++;
+            effacer_terminal();
             printf("\nAjout de la regle numero %d :",compteurRegle);
             r = creer_regle();
 
@@ -30,6 +32,7 @@ BC remplir_bc(BC bc){
 
                 choixPrem = 0;
                 while(choixPrem != 1 && choixPrem != 2){
+                    effacer_terminal();
                     printf("\nQue voulez vous faire? \n1.Ajouter une proposition\n2.Ajouter la conclusion\nChoix :");
                     gets(input);
                     choixPrem = atoi(input);
@@ -38,6 +41,7 @@ BC remplir_bc(BC bc){
                 switch (choixPrem){
                 case 1: // Ajouter une proposition
                     compteurProp++;
+                    effacer_terminal();
                     printf("\nAjout de la proposition numero %d:",compteurProp);
                     gets(input);
                     if(strlen(input) < 100){
@@ -56,10 +60,12 @@ BC remplir_bc(BC bc){
                 }
             }
 
+        case 2:
             // Ajout de la conclusion
             printf("\nConclusion :");
             gets(input);
             while(strlen(input) > 100){
+                effacer_terminal();
                 printf("\nLa conclusion doit faire moins de 100 caracteres");
                 printf("\nConclusion :");
                 gets(input);
@@ -68,12 +74,8 @@ BC remplir_bc(BC bc){
             afficher_regle(r);
             printf("\nConclusion ajoutee");
             ajout_regle_bc(bc,r);
-            printf("**%",bc->rgl.ccl);
             afficher_bc(bc);
             printf("\nRegle ajoutee");
-            break;
-
-        case 2:
             break;
         default:
             printf("\nErreur choix menu");
@@ -83,4 +85,11 @@ BC remplir_bc(BC bc){
 
     return bc;
     
+}
+
+void pause(){
+    char enter = 0;
+    printf("\nAppuiez sur Entrer pour continer");
+    while (enter != '\r' && enter != '\n') { enter = getchar(); }
+    effacer_terminal();
 }

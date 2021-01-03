@@ -1,6 +1,15 @@
 #ifndef INTERFACE
 #define INTERFACE
 
+#define WINDOWS
+#ifdef WINDOWS
+#define effacer_terminal() system("cls");
+#endif
+
+#ifdef UNIX
+#define effacer_terminal() system("clear");
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,5 +25,11 @@
  * @return BC 
  */
 BC remplir_bc(BC bc);
+
+/**
+ * @brief attend une entrée de l'utilisateur pour continuer le programme
+ * 
+ */
+void pause();
 
 #endif
