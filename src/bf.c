@@ -12,7 +12,7 @@ bool bf_est_vide(BF b){
 BF ajout_fait_bf(BF b, char* contenu){
     if(bf_est_vide(b)){
         b = (BF) malloc(sizeof(Proposition));
-        b->contenu = malloc(strlen(contenu));
+        b->contenu = malloc(strlen(contenu)+1);
         strcpy(b->contenu,contenu);
         b->suiv = NULL;
     }else{
@@ -21,7 +21,7 @@ BF ajout_fait_bf(BF b, char* contenu){
             curseur = curseur->suiv;
         }
         BF nouvFait = (BF) malloc(sizeof(Proposition));
-        nouvFait->contenu = malloc(strlen(contenu));
+        nouvFait->contenu = malloc(strlen(contenu)+1);
         strcpy(nouvFait->contenu,contenu);
         nouvFait->suiv = NULL;
         curseur->suiv = nouvFait; 
@@ -51,8 +51,8 @@ void suppr_bf(BF b){
         BF tmp = NULL;
         while(!bf_est_vide(curseur)){
             tmp = curseur->suiv;
-            //free(curseur->contenu);
-            //free(curseur);
+            free(curseur->contenu);
+            free(curseur);
             curseur = tmp;
         }
         printf("\nBase de faits supprimee correctement");

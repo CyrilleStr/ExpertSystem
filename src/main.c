@@ -5,12 +5,13 @@
 int main(){
 
     // Déclaration d'une base de connaissance
+    
     Regle r1 = creer_regle();
     Regle r2 = creer_regle();
     Regle r3 = creer_regle();
 
     r1 = ajout_proposition(r1,"fievre");
-    r1 = ajout_proposition(r1,"perte de gout");
+    r1 = ajout_proposition(r1,"perte de goût");
     r1 = ajout_proposition(r1,"toux");
     r1 = ajout_conclusion(r1,"covid");
 
@@ -20,17 +21,10 @@ int main(){
     r2 = ajout_proposition(r2,"eternuments");
     r2 = ajout_conclusion(r2,"grippe");
 
-    /* Ne fonctionne qu'en debug mode
-    r3 = ajout_proposition(r3,"diarrhée");
-    r3 = ajout_proposition(r3,"nausées");
+    r3 = ajout_proposition(r3,"diarrhee");
+    r3 = ajout_proposition(r3,"nausees");
     r3 = ajout_proposition(r3,"fievre");
-    r3 = ajout_conclusion(r3,"gastro-enterite");*/
-
-    // Fonctionne tt le tps
-    r3 = ajout_proposition(r3,"dia");
-    r3 = ajout_proposition(r3,"nau");
-    r3 = ajout_proposition(r3,"fie");
-    r3 = ajout_conclusion(r3,"gastro-enterite");
+    r3 = ajout_conclusion(r3,"gastro enterite");
 
     BC bc = creer_bc();
     bc = ajout_regle_bc(bc,r1);
@@ -42,9 +36,9 @@ int main(){
     BF bf = creer_bf();
     bf = ajout_fait_bf(bf,"perte de gout");
     bf = ajout_fait_bf(bf,"nausees");
+    bf = ajout_fait_bf(bf,"diarrhee");
     bf = ajout_fait_bf(bf,"fievre");
     bf = ajout_fait_bf(bf,"toux");
-
 
     afficher_bc(bc);
     afficher_bf(bf);
