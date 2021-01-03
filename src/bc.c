@@ -46,17 +46,3 @@ void suppr_bc(BC b){
         printf("\nBase de connaissances supprimee correctement");
     }
 }
-
-void afficher_bc(BC b){
-    if(bc_est_vide(b)){
-        printf("\nLa base de connaissance est vide");
-    }else{
-        BC curseur = b; 
-        printf("\n************Base de connaisannce************");
-        while(!bc_est_vide(curseur)){
-            afficher_regle(regle_tete_bc(curseur));
-            curseur = curseur->suiv;
-        }
-        printf("\n********************************************");
-    }
-}

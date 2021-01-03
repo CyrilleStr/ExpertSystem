@@ -33,7 +33,7 @@ char* conclusion(Regle r){
         while(!regle_est_vide(curseur->suiv)){
             curseur = curseur->suiv;
         }
-        return curseur->contenu;
+        return contenu(curseur);
     }
 }
 
@@ -71,7 +71,7 @@ bool contient(Regle r, char* prop){
     if(regle_est_vide(r)){
         return false;
     }else{
-        if(strcmp(r->contenu,prop) == 0){
+        if(strcmp(contenu(r),prop) == 0){
             return true;
         }else{
             return contient(r->suiv,prop);
@@ -84,7 +84,7 @@ Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop){
         return NULL;
     } else {
         // Première proposition
-        if(strcmp(p->contenu, prop) == 0){ // La proposition à supprimer est la première
+        if(strcmp(contenu(p), prop) == 0){ // La proposition à supprimer est la première
             if(regle_est_vide(p->suiv)){ // il n'y a qu'une seule proposition
                 return NULL;
             }else{
@@ -99,7 +99,7 @@ Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop){
             if(regle_est_vide(p->suiv)){ // La prémisse contient une seule proposition et la première proposition ne correspondait pas
                 return ptrOriginal;
             } else {
-                if(strcmp(p->suiv->contenu, prop) == 0){ // Le suivant est à supprimer
+                if(strcmp(contenu(p->suiv), prop) == 0 && p->valeur == true){ // Le suivant est à supprimer
                     Regle tmp = p->suiv->suiv;
                     free(p->suiv->contenu);
                     free(p->suiv);
@@ -124,34 +124,6 @@ void suppr_regle(Regle r){
             free(curseur->contenu);
             free(curseur);
             curseur = tmp;
-        }
-    }
-}
-
-void afficher_regle(Regle r){
-    if(regle_est_vide(r)){
-        printf("\n\n\tLa regle est vide");
-    }else{
-        printf("\n\n\t***Regle***");
-        // Prémisse
-        if(regle_est_vide(r)){
-            printf("\n\tLa premisse est vide.");
-        } else {
-            Regle curseur = r;
-            int i = 1;
-            printf("\n\tPremisse :");
-            while(!regle_est_vide(curseur->suiv)){
-                printf("\n\t\t%d : %s",i,curseur->contenu);
-                if(curseur->valeur){
-                    printf(" (vrai)");
-                }else{
-                    printf(" (faux)");
-                }
-                curseur = curseur->suiv;
-                i++;
-            }
-            printf("\n\tConclusion :");
-            printf("\n\t\t%s",curseur->contenu);
         }
     }
 }

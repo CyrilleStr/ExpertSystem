@@ -1,16 +1,16 @@
 #include <moteur_inference.h>
 
-BF moteur_inference(BC bc, BF bf){
+Regle moteur_inference(BC bc, Regle bf){
 
     BC bcCurseur = bc;
-    BF bfCurseur = creer_bf();
+    Regle bfCurseur = creer_regle();
 
-    while(!bc_est_vide(bcCurseur)){ // traverse la base de connaissance (accède à chaque prémisse des règles de la bc)
+    while(!bc_est_vide(bcCurseur)){ // traverse la base de connaissance (accède à chaque proposition des règles de la bc)
         bfCurseur = bf;
-        while(!bf_est_vide(bfCurseur)){ // traverse la base de faits (accède à chaque fait)
+        while(!regle_est_vide(bfCurseur)){ // traverse la base de faits (accède à chaque fait)
             
             // supprime la proposition de la règle si le fait est contenu dans la prémisse (suppr_prop ne fait rien si le fait n'est pas contenu dans la règle)
-            bcCurseur->rgl.prem = suppr_prop(bcCurseur->rgl.prem,bcCurseur->rgl.prem,bfCurseur->contenu);
+            bcCurseur->rgl = suppr_prop(bcCurseur->rgl,bcCurseur->rgl,contenu(bfCurseur));
 
             bfCurseur = bfCurseur->suiv; 
         }
@@ -18,14 +18,27 @@ BF moteur_inference(BC bc, BF bf){
     }
 
     bcCurseur = bc;
-    BF faits_verifies = creer_bf();
+    Regle faits_verifies = creer_regle();
     
     while(!bc_est_vide(bcCurseur)){ // traverse la base de connaissances (accède à chaque règle)
-        if(prem_est_vide(bcCurseur->rgl.prem)){ // la prémisse est vide de la règle = la conclusion est vérifée
-            faits_verifies = ajout_fait_bf(faits_verifies,bcCurseur->rgl.ccl); // on ajoute la conclusion au
+        if(regle_est_vide(bcCurseur->rgl->suiv)){ // il ne reste plus qu'un element dans la rèlge (la conclusion) <=> la prémisse est vide
+            faits_verifies = ajout_proposition(faits_verifies,contenu(bcCurseur->rgl),true); // on ajoute la conclusion au
         }
         bcCurseur = bcCurseur->suiv;
     }
 
     return faits_verifies;
+}
+
+void afficher_faits_verifies(Regle bf){
+    if(regle_est_vide(bf)){
+        printf("\nAucune conclusion n'est verife");
+    }else{
+        printf("\nConlusions verifees :");
+        while(!regle_est_vide(bf)){
+            printf("\n\t%s",contenu(bf));
+            bf = bf->suiv;
+        }
+    }
+
 }

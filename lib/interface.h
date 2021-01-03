@@ -16,20 +16,33 @@
 #include <stdbool.h>
 #include "regle.h"
 #include "bc.h"
-#include "bf.h"
-
-/**
- * @brief Interface utilisateur lui permettant de remplir une base de connaissance
- * 
- * @param bc BC la base de connsaisance à remplir
- * @return BC 
- */
-BC remplir_bc(BC bc);
 
 /**
  * @brief attend une entrée de l'utilisateur pour continuer le programme
  * 
  */
 void pause();
+
+/**
+ * @brief Affiche les éléments d'une base de connaissance
+ * 
+ * @param bc BC
+ */
+void afficher_bc(BC bc);
+
+/**
+ * @brief Affiche le contenu d'une règle
+ * 
+ * @param r Regle
+ */
+void afficher_regle(Regle r);
+
+/**
+ * @brief Affiche un base de fait
+ * 
+ * @param bf Regle
+ */
+void afficher_bf(Regle bf);
+
 
 #endif

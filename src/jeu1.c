@@ -6,24 +6,23 @@
 int main(){
     
    // Déclaration d'une base de connaissance
+
     Regle r1 = creer_regle();
     Regle r2 = creer_regle();
     Regle r3 = creer_regle();
 
-    r1 = ajout_proposition(r1,"fievre");
-    r1 = ajout_proposition(r1,"perte de gout");
-    r1 = ajout_proposition(r1,"toux");
+    r1 = ajout_proposition(r1,"fievre",true);
+    r1 = ajout_proposition(r1,"perte de gout",true);
+    r1 = ajout_proposition(r1,"toux",true);
     r1 = ajout_conclusion(r1,"covid");
 
-    r2 = ajout_proposition(r2,"epuisements");
-    r2 = ajout_proposition(r2,"maux de tete");
-    r2 = ajout_proposition(r2,"maux de ventre");
-    r2 = ajout_proposition(r2,"eternuments");
-    r2 = ajout_conclusion(r2,"grippe");
-
-    r3 = ajout_proposition(r3,"diarrhee");
-    r3 = ajout_proposition(r3,"nausees");
-    r3 = ajout_proposition(r3,"fievre");
+    r2 = ajout_proposition(r2,"epuisements",true);
+    r2 = ajout_proposition(r2,"maux de tete",true);
+    r2 = ajout_proposition(r2,"maux de ventre",true);
+    
+    r3 = ajout_proposition(r3,"diarrhee",true);
+    r3 = ajout_proposition(r3,"nausees",true);
+    r3 = ajout_proposition(r3,"fievre",true);
     r3 = ajout_conclusion(r3,"gastro enterite");
 
     BC bc = creer_bc();
@@ -33,12 +32,12 @@ int main(){
 
     // Déclaration d'une base de fait
 
-    BF bf = creer_bf();
-    bf = ajout_fait_bf(bf,"perte de gout");
-    bf = ajout_fait_bf(bf,"nausees");
-    bf = ajout_fait_bf(bf,"diarrhee");
-    bf = ajout_fait_bf(bf,"fievre");
-    bf = ajout_fait_bf(bf,"toux");
+    Regle bf = creer_regle();
+    bf = ajout_conclusion(bf,"perte de gout");
+    bf = ajout_conclusion(bf,"nausees");
+    bf = ajout_conclusion(bf,"diarrhee");
+    bf = ajout_conclusion(bf,"fievre");
+    bf = ajout_conclusion(bf,"toux");
 
     afficher_bc(bc);
     pause();
@@ -47,16 +46,16 @@ int main(){
 
     // Moteur d'inference
 
-    BF faits_verifies = creer_bf();
+    Regle faits_verifies = creer_regle();
     faits_verifies = moteur_inference(bc,bf);
 
-    printf("\n\nFaits verifies :");
-    afficher_bf(faits_verifies);
+    afficher_faits_verifies(faits_verifies);
     pause();
 
-    // Libération de l'espace 
+    // Libération de l'espace
+
     suppr_bc(bc);
-    suppr_bf(bf);
-    suppr_bf(faits_verifies);
+    suppr_regle(bf);
+    suppr_regle(faits_verifies);
     return 0;
 }

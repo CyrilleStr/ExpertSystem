@@ -108,11 +108,5 @@ Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop);
  */
 void suppr_regle(Regle r);
 
-/**
- * @brief Affiche le contenu d'une règle
- * 
- * @param r Regle
- */
-void afficher_regle(Regle r);
 
 #endif

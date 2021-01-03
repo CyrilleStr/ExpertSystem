@@ -65,11 +65,5 @@ Regle regle_tete_bc(BC b);
  */
 void suppr_bc(BC b);
 
-/**
- * @brief Affiche les éléments d'une base de connaissance
- * 
- * @param b BFn
- */
-void afficher_bc(BC b);
 
 #endif

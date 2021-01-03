@@ -7,7 +7,6 @@
 #include <stdbool.h>
 #include <regle.h>
 #include <bc.h>
-#include <bf.h>
 
 /***** Définition des prototypes *****/
 
@@ -15,9 +14,17 @@
  * @brief Déduit une liste de faits vrais, en fonction d'une base de connaissances et d'une base de faits
  * 
  * @param bc BC
- * @param bf BF
- * @return BF une liste chaînées de fatis vrais
+ * @param bf Regle
+ * @return Regle une liste chaînées de faits vrais
  */
-BF moteur_inference(BC bc, BF bf);
+Regle moteur_inference(BC bc, Regle bf);
+
+/**
+ * @brief Affiche les faits vérifiés
+ * 
+ * @param bf 
+ */
+void afficher_faits_verifies(Regle bf);
+
 
 #endif
