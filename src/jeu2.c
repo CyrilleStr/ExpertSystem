@@ -16,8 +16,8 @@ int main(){
     r1 = ajout_conclusion(r1,"6 credits valides");
 
     r2 = ajout_proposition(r2,"120 credits ECTS valides",true);
-    r2 = ajout_proposition(r2,"Plus de 3 absences",false);
-    r2 = ajout_proposition(r2,"Plus de 3 retards",false);
+    r2 = ajout_proposition(r2,"aucune absence",true);
+    r2 = ajout_proposition(r2,"aucun retard",true);
     r2 = ajout_conclusion(r2,"Passe en branche");
 
     r3 = ajout_proposition(r3,"IFD2: notes eleminatoires",false);
@@ -35,7 +35,8 @@ int main(){
     bf = ajout_conclusion(bf,"LO21: notes eliminatoires");
     bf = ajout_conclusion(bf,"LO21: plus de la moyenne");
     bf = ajout_conclusion(bf,"120 credits ECTS valides");
-    bf = ajout_conclusion(bf,"Plus de 3 retards");
+    bf = ajout_conclusion(bf,"aucune absence");
+    bf = ajout_conclusion(bf,"aucun retard");
 
     afficher_bc(bc);
     pause();
@@ -55,5 +56,5 @@ int main(){
     suppr_bc(bc);
     suppr_regle(bf);
     suppr_regle(faits_verifies);
-    return 0;
+    return 0;   
 }

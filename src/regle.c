@@ -84,7 +84,7 @@ Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop){
         return NULL;
     } else {
         // Première proposition
-        if(strcmp(contenu(p), prop) == 0){ // La proposition à supprimer est la première
+        if(strcmp(contenu(p), prop) == 0 && p->valeur == true){ // La proposition à supprimer est la première
             if(regle_est_vide(p->suiv)){ // il n'y a qu'une seule proposition
                 return NULL;
             }else{
@@ -99,7 +99,7 @@ Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop){
             if(regle_est_vide(p->suiv)){ // La prémisse contient une seule proposition et la première proposition ne correspondait pas
                 return ptrOriginal;
             } else {
-                if(strcmp(contenu(p->suiv), prop) == 0 && p->valeur == true){ // Le suivant est à supprimer
+                if(strcmp(contenu(p->suiv), prop) == 0 && p->suiv->valeur == true){ // Le suivant est à supprimer
                     Regle tmp = p->suiv->suiv;
                     free(p->suiv->contenu);
                     free(p->suiv);
@@ -125,6 +125,7 @@ void suppr_regle(Regle r){
             free(curseur);
             curseur = tmp;
         }
+        printf("\nRegle supprimee correctement");
     }
 }
 

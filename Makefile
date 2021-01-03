@@ -7,7 +7,7 @@ jeu1: build/regle.o build/bc.o build/interface.o build/moteur_inference.o build/
 	gcc -o jeu1 build/regle.o build/bc.o build/interface.o build/moteur_inference.o build/jeu1.o
 jeu2: build/regle.o build/bc.o  build/moteur_inference.o build/interface.o build/jeu2.o
 	gcc -o jeu2 build/regle.o build/bc.o  build/moteur_inference.o build/interface.o build/jeu2.o
-jeu3: build/regle.o build/bc.o  build/moteur_inference.o build/interface.o build/jeu3.o
+jeu3: build/regle.o build/bc.o build/moteur_inference.o build/interface.o build/jeu3.o
 	gcc -o jeu3 build/regle.o build/bc.o build/moteur_inference.o build/interface.o build/jeu3.o
 
 build/regle.o: src/regle.c
@@ -22,7 +22,7 @@ build/jeu1.o: src/jeu1.c lib/regle.h lib/bc.h  lib/moteur_inference.h
 	gcc -o build/jeu1.o -c src/jeu1.c $(CFLAGS)
 build/jeu2.o: src/jeu2.c lib/regle.h lib/bc.h  lib/moteur_inference.h
 	gcc -o build/jeu2.o -c src/jeu2.c $(CFLAGS)
-build/jeu3.o: src/jeu3.c lib/regle.h lib/bc.h  lib/moteur_inference.h
+build/jeu3.o: src/jeu3.c lib/regle.h lib/bc.h lib/moteur_inference.h
 	gcc -o build/jeu3.o -c src/jeu3.c $(CFLAGS)
 
 clean:

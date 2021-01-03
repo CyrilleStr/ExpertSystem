@@ -11,6 +11,7 @@ Regle moteur_inference(BC bc, Regle bf){
             
             // supprime la proposition de la règle si le fait est contenu dans la prémisse (suppr_prop ne fait rien si le fait n'est pas contenu dans la règle)
             bcCurseur->rgl = suppr_prop(bcCurseur->rgl,bcCurseur->rgl,contenu(bfCurseur));
+            
 
             bfCurseur = bfCurseur->suiv; 
         }
