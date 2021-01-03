@@ -14,29 +14,15 @@
  */
 typedef struct proposition {
     char* contenu;
+    bool valeur;
     struct proposition* suiv;
 } Proposition;
 
 /**
- * @brief Définition d'une prémisse comme une liste chaînée de propositions (pour une meilleure lisibilité du code)
+ * @brief Définition d'une règle comme une liste chaînée de propositions dont le dernier élément est la conclusion
  * 
  */
-typedef Proposition* Premisse;
-
-/**
- * @brief Définition d'une conclusion comme étant une chaîne de caractères (meilleure lisibilité du code)
- * 
- */
-typedef char* Conclusion;
-
-/**
- * @brief Structure composée d'une prémisse et d'une conclusion.
- * 
- */
-typedef struct regle {
-    Premisse prem;
-    Conclusion ccl;
-} Regle;
+typedef Proposition* Regle;
 
 
 /***** Définition des prototypes *****/
@@ -56,15 +42,6 @@ Regle creer_regle();
 bool regle_est_vide(Regle r);
 
 /**
- * @brief test si une prémisse est vide
- * 
- * @param p Premsisse
- * @return true si p est vide
- * @return false si p n'est pas vide
- */
-bool prem_est_vide(Premisse p);
-
-/**
  * contenu : accède à la proposition se trouvant en tête d'une prémisse
  * @param Regle r
  * @return string
@@ -72,8 +49,16 @@ bool prem_est_vide(Premisse p);
 char* contenu(Regle r);
 
 /**
- * conclusion : accède à la conclusion d'une règle
- * @param Regle r
+ * @brief renvoie (sous forme de chaîne de caractères) la valeur de la proposition
+ * 
+ * @param r Regle
+ * @return char* (vrai ou faux) 
+ */
+char* valeur(Regle r);
+
+/**
+ * conclusion : accède à la conclusion d'une règle (dernier élément de la liste)
+ * @param r Regle
  * @return string
  */
 char* conclusion(Regle r);
@@ -81,18 +66,19 @@ char* conclusion(Regle r);
 /**
  * @brief ajoute une proposition à une règle, l'ajout se fait en queue.
  * 
- * @param regle 
+ * @param r 
  * @param prop 
  * @return Regle 
  */
-Regle ajout_proposition(Regle r, char* prop);
+Regle ajout_proposition(Regle r, char* prop, bool valeur);
 
 /**
- * ajout_conclusion : ajoute une conlusion à la fin d'une regle (liste chaînées de proposition)
- * @param Regle r
- * @param ccl string
- * @return Regle
- */ 
+ * @brief ajoute la conclusion d'une règle, dernier élément de la liste de proposition
+ * 
+ * @param r 
+ * @param ccl 
+ * @return Regle 
+ */
 Regle ajout_conclusion(Regle r, char* ccl);
 
 /**
@@ -103,7 +89,7 @@ Regle ajout_conclusion(Regle r, char* ccl);
  * @return true la prémisse contient la proposition
  * @return false la prémisse ne contient pas la proposition
  */
-bool contient(Premisse p, char* prop);
+bool contient(Regle p, char* prop);
 
 /**
  * @brief Supprime une proposition d'une prémisse
@@ -113,7 +99,7 @@ bool contient(Premisse p, char* prop);
  * @param prop proposition à supprimer
  * @return Premisse prémisse mise à jour
  */
-Premisse suppr_prop(Premisse p, Premisse ptrOriginal, char* prop);
+Regle suppr_prop(Regle p, Regle ptrOriginal, char* prop);
 
 /**
  * @brief Libére l'espace alloué en mémoire à une règle
