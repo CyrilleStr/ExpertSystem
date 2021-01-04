@@ -1,0 +1,88 @@
+**** LEXIQUE DE LA LIBRAIRIE ****
+
+BC : Base de conaissance
+
+
+**** ALGORITHMES ****
+** CREER UNE BASE DE CONNAISSANCE **
+* LEXIQUE
+- nouvelleBase : élément de type base de conaissance.
+
+* DONNEES
+/
+* RESULTAT(S)
+- nouvelleBase
+
+* DEBUT
+    nouvelleBase <- new(BC)
+    retourner nouvelleBase
+* FIN
+
+** VERIFIER SI UNE BASE EST VIDE **
+* LEXIQUE
+
+* DONNEES
+- b : Base à tester
+* RESULTAT(S)
+- VRAI ou FAUX
+
+* DEBUT
+    si b est indéfini alors
+        retourner VRAI
+    sinon 
+        retourner FAUX
+    fin sinon
+* FIN
+
+** AJOUTER UNE REGLE A LA BASE DE CONAISSANCE **
+* LEXIQUE
+
+* DONNEES
+- b : Base à modifier
+- r : Règle à ajouter
+* RESULTAT(S)
+- b : Base modifiée
+
+* DEBUT
+    SI est_vide(b) ALORS
+        b <- new(BC)
+        value(b) <- r
+    SINON
+        curseurBC<Base de conaissance> <- b
+        TANT QUE est_vide(next(curseurBC)) == FAUX FAIRE
+            curseurBC <- next(curseurBC)
+        FIN TANT QUE
+        value(next(curseurBC)) <- regle_tete_bc
+    FIN SI
+* FIN
+
+** RENVOYER LA TETE D'UNE REGLE **
+* LEXIQUE
+/
+* DONNEES
+- b<Base de conaissance> : Base
+
+* RESULTAT
+- r<ElemRegle> : Proposition en tête de la Règle
+
+* DEBUT
+    retourner head(r) 
+* FIN
+
+** SUPPRIMER UNE BASE DE CONAISSANCE **
+* DONNEES
+- b<Base de conaissance> : Base à SUPPRIMER
+
+* DEBUT
+    SI est_vide(b) ALORS
+        retourner FAUX
+    SINON
+        curseurTmp<Base de conaissances> <- creer_bc
+        curseur<Base de conaissance> <- creer_bc
+        TANT QUE est_vide(curseur) == FAUX FAIRE
+            curseurTmp = next(curseur)
+            suppr_regle(value(curseur))
+            liberer(curseur)
+            curseur = curseurTmp
+        FIN TANT QUE
+* FIN
