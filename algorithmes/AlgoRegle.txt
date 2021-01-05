@@ -1,5 +1,6 @@
 **** LEXIQUE DE LA LIBRAIRIE ****
 
+Proposition : Chaîne de caractères ayant pour valeur vrai ou faux
 Règle : liste de proposition, dont le dernier élément est la conclusion de la règle
 
 
@@ -46,6 +47,20 @@ retourner nouvelleRegle
     fin sinon
 * FIN
 
+** RENVOYER LA VALEUR D'UNE REGLE **
+* LEXIQUE
+/
+* DONNEES
+- r : Règle dont la valeur est a renvoyer
+
+* DEBUT
+    si valeur(regle) est vrai alors
+        retourner vrai
+    sinon
+        retourner faux
+    fin sinon
+* FIN
+
 ** RENVOYER LA CONCLUSION D'UNE REGLE **
 * LEXIQUE
 /
@@ -69,19 +84,22 @@ retourner nouvelleRegle
 * DONNEES
 - r : Règle à modifier
 - prop : Proposition à ajouter
+- valeur : valeur de la proposition (vrai ou faux)
     
 * DEBUT
     si est_vide(r) alors
-            nouvelleProposition(r)
+            r<proposition>
             contenu(r) <- prop
+            valeur(r) <- valeur
             suiv(r) <- indéfini
         sinon
             tant que non est_vide(r) faire
                 r <- suiv(r)
             fin tant que
-            nouvelleProposition(nouvProp)
+            nouvProp<Proposition>
             contenu(nouvProp) <- prop
             suiv(nouvProp) <- indéfini
+            
             suiv(r) <- nouvProp
         }
         retourner r
@@ -101,7 +119,7 @@ retourner nouvelleRegle
         tant que non est_vide(suiv(r)) faire
             r <- suiv(r)
         fin tant que
-        nouvelleProposition(nouvProp)
+        nouvProp<proposition>
         contenu(nouvProp) <- ccl
         suiv(nouvProp) <- indéfini
         retourner VRAI
@@ -139,20 +157,20 @@ retourner nouvelleRegle
     si est_vide(r) ou est_vide(p) alors
         retourner indéfini
     sinon
-        si contenu(r) == prop alors
-            nouvelleProposition(tmp) <- suiv(r)
-            libérer(r)
+        si contenu(r) == prop alors et valeur(r) est vrai alors
+            tmp<proposition> <- suiv(r)
+            supprimer(r)
             retourner tmp
         sinon
             si est_vide(suiv(p)) alors
                 retourner indéfini
             sinon
-                si contenu(suiv(p)) == prop alors
-                    nouvelleProposition(tmp) <- indéfini
+                si contenu(suiv(p)) == prop et valeur(r) est vrai alors
+                    tmp<proposition> <- indéfini
                     si non est_vide(suiv(suiv(p))) alors
                         tmp <- suiv(suiv(p))
                     fin si
-                    libérer(suiv(p))
+                    supprimer(suiv(p))
                     suiv(p) <- tmp
                     retourner r
                 sinon

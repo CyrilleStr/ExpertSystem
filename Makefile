@@ -1,5 +1,4 @@
 CFLAGS=-W -Wall -std=c99 -g -I lib/
-EXEC=main
 
 all: jeu1 jeu2 jeu3
 

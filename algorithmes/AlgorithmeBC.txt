@@ -14,7 +14,7 @@ BC : Base de conaissance
 - nouvelleBase
 
 * DEBUT
-    nouvelleBase <- new(BC)
+    nouvelleBase<BC>
     retourner nouvelleBase
 * FIN
 
@@ -45,7 +45,7 @@ BC : Base de conaissance
 
 * DEBUT
     SI est_vide(b) ALORS
-        b <- new(BC)
+        b <BC>
         value(b) <- r
     SINON
         curseurBC<Base de conaissance> <- b
