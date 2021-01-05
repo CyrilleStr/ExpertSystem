@@ -49,7 +49,7 @@ BC : Base de conaissance
         value(b) <- r
     SINON
         curseurBC<Base de conaissance> <- b
-        TANT QUE est_vide(next(curseurBC)) == FAUX FAIRE
+        TANT QUE est_vide(next(curseurBC)) est faux FAIRE
             curseurBC <- next(curseurBC)
         FIN TANT QUE
         value(next(curseurBC)) <- regle_tete_bc
@@ -79,10 +79,10 @@ BC : Base de conaissance
     SINON
         curseurTmp<Base de conaissances> <- creer_bc
         curseur<Base de conaissance> <- creer_bc
-        TANT QUE est_vide(curseur) == FAUX FAIRE
-            curseurTmp = next(curseur)
+        TANT QUE est_vide(curseur) est faux FAIRE
+            curseurTmp <- next(curseur)
             suppr_regle(value(curseur))
             liberer(curseur)
-            curseur = curseurTmp
+            curseur <- curseurTmp
         FIN TANT QUE
 * FIN
