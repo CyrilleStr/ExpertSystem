@@ -1,2 +1,3 @@
-# lo21_2020
-Projet de LO21 : réalisation d'un système expert
+# Basic expert system in C
+For a school Project I coded a expert system in C. <Br>
+Documentation are variable names are in french.
